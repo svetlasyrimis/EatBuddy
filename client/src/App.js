@@ -4,6 +4,7 @@ import './App.css';
 import CardCombo from './components/Shuffler'
 import Button from 'react-bootstrap/Button'
 import Header from './components/Header'
+import Nav from './components/Nav'
 
 
 class App extends React.Component {
@@ -34,11 +35,9 @@ class App extends React.Component {
 
   render() {
 
-    // const { food, foodImage, drink, drinkImage } = this.state;
-
-    // debugger;
     return (
       <div>
+        <Nav />
         <Header />
         <h1>{'This will always render'}</h1>
         <Button variant="success" size="lg" onClick={this.fetchMealDrink}>Get a Combo</Button>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default (props) => {
+export default (props) => (
   <>
     <h3>Log In Form</h3>
     <form onSubmit={props.handleSubmit}>
@@ -18,7 +18,8 @@ export default (props) => {
         value={props.loginFormData.password}
         id="password"
         onChange={props.handleChange} />
+
       <input type="submit" value="Sign In!" />
     </form>
   </>
-}
+)

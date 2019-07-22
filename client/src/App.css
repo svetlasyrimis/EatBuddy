@@ -52,3 +52,53 @@ header {
 #nav-bar a:hover{
   color: rgb(194, 25, 25);
 }
+
+.shuffler div{
+  font-family: 'Lobster', cursive;
+  font-size: 25px;
+}
+
+.shuffler h1{
+  font-family: 'Lobster', cursive;
+  font-size: 50px;
+}
+
+.shuffler{
+  align-content: center;
+  text-align: center;
+}
+
+.log{
+  display: flex; 
+  flex-direction: column;
+  width: 150px; 
+  margin: 0 auto;
+
+}
+
+
+.Loginform {
+  
+  align-content: center;
+  text-align: center;
+  
+}
+
+.reg{
+  display: flex; 
+  flex-direction: column;
+  width: 200px; 
+  margin: 0 auto;
+
+}
+
+.Registerform{
+  align-content: center;
+  text-align: center;
+  display: block; 
+}
+
+.button{
+  align-content: center;
+  text-align: center;
+}

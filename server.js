@@ -2,7 +2,7 @@ const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-// const userRouter = require('./routes/userRouter');
+const userRouter = require('./routes/userRouter');
 const comboRouter = require('./routes/comboRouter');
 const PORT = process.env.PORT || 3005;
 
@@ -11,6 +11,7 @@ app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use('/combos', comboRouter);
+app.use('/users', userRouter);
 
 
 app.get('/', (req, res) => {

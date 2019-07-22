@@ -16,7 +16,7 @@ const User = sequelize.define('user', {
 
 const Combo = sequelize.define('combo', {
   food: Sequelize.STRING,
-  foor_pic: Sequelize.STRING,
+  food_pic: Sequelize.STRING,
   drink: Sequelize.STRING,
   drink_pic: Sequelize.STRING,
 });

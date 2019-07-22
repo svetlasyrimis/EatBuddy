@@ -134,13 +134,17 @@ class App extends React.Component {
               handleLoginFormChange={this.handleLoginFormChange}
             />} />
         </main>
-        <h1>{'This will always render'}</h1>
 
-        <Button variant="success" size="lg" onClick={this.fetchMealDrink}>Get a Combo</Button>
-        {this.state &&
+        <div className="shuffler">
+          <h1>{'Meal Shuffler'}</h1>
 
-          <CardCombo data={this.state} />
-        }
+
+          {this.state &&
+
+            <CardCombo data={this.state} />
+          }
+          <Button variant="success" size="lg" onClick={this.fetchMealDrink}>Get a Combo</Button>
+        </div>
 
       </div>
     )

@@ -16,7 +16,9 @@ export default function Login(props) {
               handleSubmit={props.handleRegisterSubmit}
               handleChange={props.handleRegisterFormChange}
             />
-            <button onClick={props.toggleAuthView}>Login</button>
+            <div className="button">
+              <button onClick={props.toggleAuthView}>Login</button>
+            </div>
           </>
         )
       }
@@ -30,7 +32,9 @@ export default function Login(props) {
               handleSubmit={props.handleLoginSubmit}
               handleChange={props.handleLoginFormChange}
             />
-            <button onClick={props.toggleAuthView}>Register</button>
+            <div className="button">
+              <button onClick={props.toggleAuthView}>Register</button>
+            </div>
           </>
         )
       }

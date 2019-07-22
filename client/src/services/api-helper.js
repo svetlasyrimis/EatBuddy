@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const fetchMeal = async () => {
+export const fetchFood = async () => {
   const resp = await axios.get("https://www.themealdb.com/api/json/v1/1/random.php");
   console.log(resp.data.meals[0].strMeal)
   console.log(resp.data.meals[0].strMealThumb)

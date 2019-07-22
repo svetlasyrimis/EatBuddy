@@ -1,30 +1,53 @@
 import React from 'react';
-import Header from './components/Header';
-import Nav from './components/Nav'
+import { fetchFood, fetchDrink } from './services/api-helper'
 import './App.css';
-import { fetchMeal, fetchDrink } from './services/api-helper';
-import axios from 'axios';
-// import { Link, Route } from 'react-router-dom';
+import CardCombo from './components/Shuffler'
+import Button from 'react-bootstrap/Button'
+import Header from './components/Header'
+
 
 class App extends React.Component {
+  constructor() {
+    super()
+    this.super = {
+      food: '',
+      foodImage: '',
+      drink: '',
+      drinkImage: ''
 
+    }
+  }
 
-  // fetchMealDrink = async () => {
-  //   console.log(foodResp);
-  // }
+  fetchMealDrink = async () => {
 
-  async componentDidMount() {
-    const foodResp = await fetchMeal();
     const drinkResp = await fetchDrink();
+    console.log(drinkResp)
+    const foodResp = await fetchFood();
+    console.log(foodResp);
+    this.setState({
+      food: foodResp.strMeal,
+      foodImage: foodResp.strMealThumb,
+      drink: drinkResp.strDrink,
+      drinkImage: drinkResp.strDrinkThumb
+    })
   }
 
   render() {
+
+    // const { food, foodImage, drink, drinkImage } = this.state;
+
+    // debugger;
     return (
-      <div className="App" >
-        <Nav />
+      <div>
         <Header />
+        <h1>{'This will always render'}</h1>
+        <Button variant="success" size="lg" onClick={this.fetchMealDrink}>Get a Combo</Button>
+        {this.state &&
+
+          <CardCombo data={this.state} />
+        }
       </div>
-    );
+    )
   }
 }
 

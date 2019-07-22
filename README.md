@@ -1,4 +1,6 @@
 # MealMatch
+##By: Team FullStack Monsters
+![](assets/team_logo.jpg)
 
 ### Project Overview
 A meal & drink suggestion app for indecisive eaters.
@@ -15,15 +17,6 @@ It is an app that helps the user generate a random meal and drink combo so that 
 * Recipes Categories
 
 
-
-Entity Relationship Diagram (ERD) diagram of the database tables, schemas, and relations. You can draw them by hand or try on of these useful links for ERDs:
-
-* [lucidchart](https://www.lucidchart.com/pages/) This is a great tool for building ERDs.
-* [draw.io](https://www.draw.io/) Another great tool for ERDs.
-* [ERDPlus](https://erdplus.com/#/) Yet another great tool for ERDS.
-
-API Endpoint Documentations list of all of your servers routes, the structure of requests that you expect and the structure of responses they send.
-
 ## Frameworks
 React.js, Express.js
 
@@ -39,8 +32,8 @@ React.js, Express.js
 
 
 ##Wireframes 
-Uploaded in the repo. 
-
+Sketches of the user interface with notes of how the user will interact with the UI.
+Wireframes should be broken into components which then should be described in a component heirarchy.
 ##React Component Heirarchy 
 
 ## Components 

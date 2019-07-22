@@ -15,6 +15,7 @@ import {
   loginUser,
 
 } from './services/auth';
+import { tsThisType } from '@babel/types';
 
 
 
@@ -108,11 +109,11 @@ class App extends React.Component {
   }
 
 
-  // toggleAuthView = () => {
-  //   this.setState(prevState => ({
-  //     currentView: prevState.currentView === 'register' ? 'login' : 'register'
-  //   }));
-  // }
+  toggleAuthView = () => {
+    this.setState(prevState => ({
+      currentView: prevState.currentView === 'register' ? 'login' : 'register'
+    }));
+  }
 
   render() {
 
@@ -121,10 +122,19 @@ class App extends React.Component {
         <Nav />
         <Header />
         <main>
-          <Route path="/" exact render={() => <Login />} />
+          <Route path="/" exact render={() =>
+            <Login
+              currentView={this.state.currentView}
+              registerFormData={this.state.registerFormData}
+              handleRegisterSubmit={this.handleRegisterSubmit}
+              handleRegisterFormChange={this.handleRegisterFormChange}
+              toggleAuthView={this.toggleAuthView}
+              loginFormData={this.state.loginFormData}
+              handleLoginSubmit={this.handleLoginSubmit}
+              handleLoginFormChange={this.handleLoginFormChange}
+            />} />
         </main>
         <h1>{'This will always render'}</h1>
-
 
         <Button variant="success" size="lg" onClick={this.fetchMealDrink}>Get a Combo</Button>
         {this.state &&

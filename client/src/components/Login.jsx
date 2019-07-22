@@ -4,34 +4,35 @@ import LoginForm from './LoginForm'
 
 
 
-export default function Login() {
+export default function Login(props) {
   return (
     <>
 
       {
-        this.state.currentView === 'register' && (
+        props.currentView === 'register' && (
           <>
             <RegisterForm
-              registerForm={this.props.state.registerFormData}
-              handleSubmit={this.props.handleRegisterSubmit}
-              handleChange={this.props.handleRegisterFormChange}
+              registerForm={props.registerFormData}
+              handleSubmit={props.handleRegisterSubmit}
+              handleChange={props.handleRegisterFormChange}
             />
-            <button onClick={this.toggleAuthView}>Login</button>
+            <button onClick={props.toggleAuthView}>Login</button>
           </>
         )
       }
 
 
       {
-        this.state.currentView === 'login' && (
+        props.currentView === 'login' && (
           <>
             <LoginForm
-              loginFormData={this.state.loginFormData}
-              handleSubmit={this.handleLoginSubmit}
-              handleChange={this.handleLoginFormChange}
+              loginFormData={props.loginFormData}
+              handleSubmit={props.handleLoginSubmit}
+              handleChange={props.handleLoginFormChange}
             />
-            <button onClick={this.toggleAuthView}>Register</button>
-          </>)
+            <button onClick={props.toggleAuthView}>Register</button>
+          </>
+        )
       }
     </>
   )

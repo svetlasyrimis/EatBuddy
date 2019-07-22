@@ -71,28 +71,28 @@ Wireframes should be broken into components which then should be described in a 
 | GET          | `/verify  `    |Load a token from localStorage when accross the app and verify it is valid |
 
 ###boardRouter
-| Method       | Endpoints      | Description  |
-| ------------- |:-------------:|    :-----:    |
-| GET           | `/`        | Get all combos by all users (not sure if we will use that)|
-| GET           |  `/user/:id `  |Get all user's combos.  |
-| POST          | `/user  `|  Add a combo to the board.   |
-| DELETE          | `/user/:id  `|  Delete a combo from the user's board and from the database.   |
-| POST          | `/user/favorites  `|  Add a combo from the boards to favorites.   |
+| Method       | Endpoints     	 | Description  |
+| ------------- |:-----------:|    :-----:       |
+| GET           | `/`           	| Get all combos by all users (not sure if we will use that)|
+| GET           |  `/user/:id `  | Get all user's combos.  |
+| POST          | `/user  `		| Add a combo to the board.   |
+| DELETE          | `/user/:id  `| Delete a combo from the user's board and from the database.   |
+| POST          | `/user/favorites  `| Add a combo from the boards to favorites.   |
 | POST         	| `/user/recipes`  |  Can add a recipe to the recipe list.   |
 
 ###favoritesRouter 
-| Method       | Endpoints      | Description  |
-| ------------- |:-------------:|    :-----:   |
-| GET           |    `/`        | Get all favorites combos by the user.|
-| PUT         	| `/:id  `   |  Can add a comment to favorites or change name of food/drink.   	|
-| DELETE         | `/:id`|  Unlike the item. |
+| Method       | Endpoints | Description  |
+| ------------- |:--------:| :-----:   |
+| GET           |    `/`   | Get all favorites combos by the user.|
+| PUT         	| `/:id  `| Can add a comment to favorites or change name of food/drink.   	|
+| DELETE         | `/:id`	| Unlike the item. |
 
 ###recipeRouter 
-| Method       | Endpoints      | Description  |
-| ------------- |:-------------:|    :-----:   |
-| GET           | `/`        | Get all recipes of the board. |
-| PUT         	| `/:id  `  |  Can add a comment to a recipe.   |
-| DELETE         | `/:id`  |  Delete a recipe. |
+| Method       | Endpoints      | Description                       |
+| ------------- |:-------------:|    :-----:                        |
+| GET           | `/`       	  | Get all recipes of the board.     |
+| PUT         	| `/:id  `  	  |  Can add a comment to a recipe.   |
+| DELETE         | `/:id`  	  |  Delete a recipe.                 |
 
 
 ## Time Estimates(Front End)

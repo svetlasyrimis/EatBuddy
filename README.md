@@ -1,11 +1,13 @@
 # MealMatch
-##By: Team FullStack Monsters
+## By: Team FullStack Monsters
 ![](assets/team_logo.jpg)
 
 ### Project Overview
+
 A meal & drink suggestion app for indecisive eaters.
 
-##Project Description
+##Project Description 
+
 It is an app that helps the user generate a random meal and drink combo so that they don’t have to decide on one. The app requires users to register first, then log in. Then they come to the home page where they can shuffle a meal & drink combo by pressing a button. If they don’t like the combo, they can shuffle until they find one they like. After it shuffles users can favorite a meal and drink to save to their dashboard, with the options to add a combo to a favorites category or to check the recipes of the combo. On the favorites page the user can also delete and put a comment on a combo.
  
 ## Feature List 
@@ -21,17 +23,17 @@ It is an app that helps the user generate a random meal and drink combo so that 
 React.js, Express.js
 
 ## MVP /POST MVP
-###MVP
+### MVP
 * Working API  endpoints and conditional rendering with React.
 * Access to board, favorites,  recipes and their corresponding buttons allowing users for CRUD operations.
 * Form validation.
 
-###POST MVP
+### POST MVP
 * Get a board of all users.
 * Add ingredients to the recipe table.
 
 
-##Wireframes 
+## Wireframes 
 Sketches of the user interface with notes of how the user will interact with the UI.
 Wireframes should be broken into components which then should be described in a component heirarchy.
 ##React Component Heirarchy 
@@ -62,7 +64,7 @@ Wireframes should be broken into components which then should be described in a 
   app.use('/recipes', recipeRouter);  
 ```
 
-###userRouter
+### userRouter
 
 | Method       | Endpoints      | Description  |
 | ------------- |:-------------:|    :-----:    |
@@ -70,7 +72,8 @@ Wireframes should be broken into components which then should be described in a 
 | POST         |  `/login `  |Login a user.  |
 | GET          | `/verify  `    |Load a token from localStorage when accross the app and verify it is valid |
 
-###boardRouter
+### boardRouter
+
 | Method       | Endpoints     	 | Description  |
 | ------------- |:-----------:|    :-----:       |
 | GET           | `/`           	| Get all combos by all users (not sure if we will use that)|
@@ -81,13 +84,15 @@ Wireframes should be broken into components which then should be described in a 
 | POST         	| `/user/recipes`  |  Can add a recipe to the recipe list.   |
 
 ###favoritesRouter 
+
 | Method       | Endpoints | Description  |
 | ------------- |:--------:| :-----:   |
 | GET           |    `/`   | Get all favorites combos by the user.|
 | PUT         	| `/:id  `| Can add a comment to favorites or change name of food/drink.   	|
 | DELETE         | `/:id`	| Unlike the item. |
 
-###recipeRouter 
+### recipeRouter 
+
 | Method       | Endpoints      | Description                       |
 | ------------- |:-------------:|    :-----:                        |
 | GET           | `/`       	  | Get all recipes of the board.     |
@@ -96,6 +101,7 @@ Wireframes should be broken into components which then should be described in a 
 
 
 ## Time Estimates(Front End)
+
 | Component 	  | Priority       | Estimated Time | Time Invested   | Actual Time    |
 | :---         |     :---:      |          :---: |      :---:      |      ---:      |
 | LoginForm    | high  			  |  3h   	         |TBD              | TBD            |

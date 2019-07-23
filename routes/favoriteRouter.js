@@ -4,23 +4,24 @@ const { Favorite } = require('../models');
 const favoriteRouter = Router();
 
 favoriteRouter.get('/', (req, res) => {
-  res.json({ combo: "get route" });
+  const favorites = Favorite.findAll()
+  res.json({ favorites});
 });
 
 favoriteRouter.post('/', async (req, res) => {
-  const combo = await Combo.create(req.body);
-  console.log(combo);
-  res.json({ combo });
+  const favorite = await Favorite.create(req.body);
+  console.log(favorite);
+  res.json({ favorite });
 });
 
-favoriteRouter.delete('/id/:id', async (req, res) => {
+favoriteRouter.delete('/:id', async (req, res) => {
   try {
-    await Combo.destroy({
+    await Favorite.destroy({
       where: {
         id: req.params.id
       }
     })
-    res.json(`Success, combo is ${req.params.id} has been destroyed`);
+    res.json(`Success, favorite is ${req.params.id} has been destroyed`);
   } catch (e) {
     console.log(e)
     res.status(401).send("Can't be deleted");
@@ -28,23 +29,23 @@ favoriteRouter.delete('/id/:id', async (req, res) => {
   
 })
 
-favoriteRouter.put('id/:id', async (req, res) => {
-  try {
-    const id = req.params.id;
-    const data = req.body;
-    await Combo.update(
-      data,{
-        where: {
-          id
-        },
-      });
-    const combo = await Combo.findByPk(id);
-    res.json(combo);
-  } catch (e) {
-    console.log(e.message);
-    res.status(500).send(e.message);
-  }
-});
+// favoriteRouter.put('id/:id', async (req, res) => {
+//   try {
+//     const id = req.params.id;
+//     const data = req.body;
+//     await favorite.update(
+//       data,{
+//         where: {
+//           id
+//         },
+//       });
+//     const favorite = await Favorite.findByPk(id);
+//     res.json(favorite);
+//   } catch (e) {
+//     console.log(e.message);
+//     res.status(500).send(e.message);
+//   }
+// });
 
 
 

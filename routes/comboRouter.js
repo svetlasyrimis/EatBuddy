@@ -19,7 +19,7 @@ comboRouter.post('/', async (req, res) => {
   res.json({ combo });
 });
 
-comboRouter.delete('/id/:id', async (req, res) => {
+comboRouter.delete('/:id', async (req, res) => {
   try {
     await Combo.destroy({
       where: {

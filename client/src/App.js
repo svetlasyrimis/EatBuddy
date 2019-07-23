@@ -1,14 +1,10 @@
 import React from 'react';
 import { fetchFood, fetchDrink } from './services/api-helper'
 import './App.css';
-import Shuffler from './components/Shuffler'
-import Button from 'react-bootstrap/Button'
 import Header from './components/Header'
-import Nav from './components/Nav'
 import Login from './components/Login'
+import MakeCombo from './components/MakeCombo'
 import { Route } from 'react-router-dom'
-import LoginForm from './components/LoginForm'
-import RegisterForm from './components/RegisterForm'
 import {
   createUser,
   verifyToken,
@@ -80,11 +76,28 @@ class App extends React.Component {
         name: '',
         password: '',
       },
-      // currentUser: user,
-      // currentView: 'welcome'
+      currentUser: user,
+      currentView: 'welcome'
     })
     // console.log(user);
   }
+
+  handleLogout = (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem('authToken')
+    const sign = localStorage.removeItem('authToken')
+    this.setState({
+      isLoggedIn: false,
+      currentView: 'login',
+
+      loginFormData: {
+        name: '',
+        password: '',
+      }
+
+    })
+  }
+
 
   handleRegisterFormChange = (ev) => {
     const { name, value } = ev.target;
@@ -107,8 +120,8 @@ class App extends React.Component {
         password: '',
         email: ''
       },
-      // currentUser: user,
-      // currentView: 'welcome'
+      currentUser: user,
+      currentView: 'welcome'
     });
   }
 
@@ -123,10 +136,11 @@ class App extends React.Component {
 
     return (
       <div>
-        <Nav />
+
         <Header />
         <main>
           <Route path="/" exact render={() =>
+
             <Login
               currentView={this.state.currentView}
               registerFormData={this.state.registerFormData}
@@ -138,15 +152,21 @@ class App extends React.Component {
               handleLoginFormChange={this.handleLoginFormChange}
             />} />
         </main>
+        <div>
+          {this.state.currentView === 'welcome' && (
 
-        <div className="shuffler">
-          <h1>{'Meal Shuffler'}</h1>
-          {this.state.meal &&
-            <Shuffler data={this.state.meal} />
-          }
-          <button onClick={this.fetchMealDrink}>Get a Combo</button>
+            <MakeCombo
+              isLoggedIn={this.state.isLoggedIn}
+              currentView={this.state.currentView}
+              loginFormData={this.state.loginFormData}
+              handleLogout={this.handleLogout}
+              meal={this.state.meal}
+              fetchMealDrink={this.fetchMealDrink}
+            />
+
+
+          )}
         </div>
-
       </div>
     )
   }

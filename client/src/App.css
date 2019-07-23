@@ -22,7 +22,7 @@
 }
 
 header {
-  margin-top: 45px;
+  margin-top: 0px;
   display: flex; 
   align-content: center;
   text-align: center;
@@ -39,6 +39,7 @@ header {
   display: flex;
   align-items: center;
   top: 0;
+  
 }
 
 #nav-bar a{
@@ -47,6 +48,7 @@ header {
   font-family: 'Lobster', cursive;
   color: black;
   font-size: 30px;
+  
 }
 
 #nav-bar a:hover{
@@ -101,4 +103,10 @@ header {
 .button{
   align-content: center;
   text-align: center;
+}
+
+/* Combo Board */
+
+.shuffler h4, li{
+  display: inline;
 }

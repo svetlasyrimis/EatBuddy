@@ -2,17 +2,21 @@ import React from 'react'
 // import { Link, Route } from 'react-router-dom'
 
 
-function Nav() {
+
+
+function Nav(props) {
+
   return (
     <header>
       <nav id="nav-bar">
         <a href="/#home-section">Home</a>
         <a href="/#recipes-section">Recipes</a>
         <a href="/#favorites-section">Favorites</a>
-        <a href="/#logout-section">Log Out</a>
+        <button onClick={props.handleLogout}>Log Out</button>
       </nav>
     </header>
   )
 }
+
 
 export default Nav;

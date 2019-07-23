@@ -24,18 +24,10 @@ userRouter.post('/', async (req, res) => {
   
   const { password_digest, ...userData } = user.dataValues;
   const token = genToken(userData)
-  
+  console.log(user.dataValues);
   res.json({ user: userData, token });
-  
-
   // console.log(user);
   console.log(user.dataValues);
-
-  const { password_digest, ...userData } = user.dataValues;
-  const token = genToken(userData)
-  console.log(token);
-  
-  res.json({ user: userData, token });
   // res.json({userData})
 
 });

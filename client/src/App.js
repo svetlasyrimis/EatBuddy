@@ -1,7 +1,7 @@
 import React from 'react';
 import { fetchFood, fetchDrink } from './services/api-helper'
 import './App.css';
-import CardCombo from './components/Shuffler'
+import Shuffler from './components/Shuffler'
 import Button from 'react-bootstrap/Button'
 import Header from './components/Header'
 import Nav from './components/Nav'
@@ -15,22 +15,23 @@ import {
   loginUser,
 
 } from './services/auth';
-import { tsThisType } from '@babel/types';
+
 
 
 
 
 class App extends React.Component {
+
   constructor() {
     super()
     this.state = {
       currentView: 'login',
       currentUser: null,
       meal: {
-        food: '',
-        foodImage: '',
-        drink: '',
-        drinkImage: ''
+        food: 'Food',
+        foodImage: 'https://cdn0.iconfinder.com/data/icons/handdrawn-ui-elements/512/Question_Mark-512.png',
+        drink: 'Drink',
+        drinkImage: 'https://cdn0.iconfinder.com/data/icons/handdrawn-ui-elements/512/Question_Mark-512.png'
       },
 
       loginFormData: {
@@ -47,15 +48,18 @@ class App extends React.Component {
 
   fetchMealDrink = async () => {
     const drinkResp = await fetchDrink();
-    console.log(drinkResp)
+    // console.log(drinkResp)
     const foodResp = await fetchFood();
-    console.log(foodResp);
+    // console.log(foodResp);
     this.setState({
-      food: foodResp.strMeal,
-      foodImage: foodResp.strMealThumb,
-      drink: drinkResp.strDrink,
-      drinkImage: drinkResp.strDrinkThumb
+      meal: {
+        food: foodResp.strMeal,
+        foodImage: foodResp.strMealThumb,
+        drink: drinkResp.strDrink,
+        drinkImage: drinkResp.strDrinkThumb
+      }
     })
+    console.log(this.state.meal)
   }
 
   handleLoginFormChange = (ev) => {
@@ -70,7 +74,7 @@ class App extends React.Component {
 
   handleLoginSubmit = async (ev) => {
     ev.preventDefault();
-    // const user = await loginUser(this.state.loginFormData);
+    const user = await loginUser(this.state.loginFormData);
     this.setState({
       loginFormData: {
         name: '',
@@ -95,8 +99,8 @@ class App extends React.Component {
 
   handleRegisterSubmit = async (ev) => {
     ev.preventDefault();
-    // const user = await createUser(this.state.registerFormData);
-    // console.log(user);
+    const user = await createUser(this.state.registerFormData);
+    console.log(user);
     this.setState({
       registerForm: {
         name: '',
@@ -137,13 +141,10 @@ class App extends React.Component {
 
         <div className="shuffler">
           <h1>{'Meal Shuffler'}</h1>
-
-
-          {this.state &&
-
-            <CardCombo data={this.state} />
+          {this.state.meal &&
+            <Shuffler data={this.state.meal} />
           }
-          <Button variant="success" size="lg" onClick={this.fetchMealDrink}>Get a Combo</Button>
+          <button onClick={this.fetchMealDrink}>Get a Combo</button>
         </div>
 
       </div>

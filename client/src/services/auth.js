@@ -27,3 +27,21 @@ export const loginUser = async (userData) => {
   return user;
 };
 
+export const verifyToken = async () => {
+  const token = localStorage.getItem('authToken');
+  if (token !== null) {
+    try {
+      const resp = await api.get('/users/verify', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      storeToken(token);
+      return resp.data.user;
+    } catch (e) {
+      console.log(e.message);
+      console.log('invalid token');
+    }
+  }
+};
+

@@ -80,11 +80,45 @@ class App extends React.Component {
         name: '',
         password: '',
       },
-      // currentUser: user,
-      // currentView: 'welcome'
+      currentUser: user,
+      currentView: 'welcome'
     })
     // console.log(user);
   }
+
+
+  // async componentDidMount() {
+  //   const user = await verifyToken();
+  //   if (user) {
+  //     this.setState({
+  //       currentUser: user,
+  //       currentView: 'welcome'
+  //     })
+  //   }
+  //   // try {
+
+  //   // } catch (e) {
+  //   //   console.log(e.message);
+  //   // }
+
+  // }
+
+  handleLogout = (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem('authToken')
+    const sign = localStorage.removeItem('authToken')
+    this.setState({
+      isLoggedIn: false,
+      currentView: 'login',
+
+      loginFormData: {
+        name: '',
+        password: '',
+      }
+
+    })
+  }
+
 
   handleRegisterFormChange = (ev) => {
     const { name, value } = ev.target;
@@ -107,8 +141,8 @@ class App extends React.Component {
         password: '',
         email: ''
       },
-      // currentUser: user,
-      // currentView: 'welcome'
+      currentUser: user,
+      currentView: 'welcome'
     });
   }
 
@@ -123,10 +157,16 @@ class App extends React.Component {
 
     return (
       <div>
-        <Nav />
+        <Nav
+          isLoggedIn={this.state.isLoggedIn}
+          currentView={this.state.currentView}
+          loginFormData={this.state.loginFormData}
+          handleLogout={this.handleLogout}
+        />
         <Header />
         <main>
           <Route path="/" exact render={() =>
+
             <Login
               currentView={this.state.currentView}
               registerFormData={this.state.registerFormData}
@@ -138,14 +178,16 @@ class App extends React.Component {
               handleLoginFormChange={this.handleLoginFormChange}
             />} />
         </main>
+        {this.state.currentView === 'welcome' && (
 
-        <div className="shuffler">
-          <h1>{'Meal Shuffler'}</h1>
-          {this.state.meal &&
-            <Shuffler data={this.state.meal} />
-          }
-          <button onClick={this.fetchMealDrink}>Get a Combo</button>
-        </div>
+          <div className="shuffler">
+
+            <h1>{'Meal Shuffler'}</h1>
+            {this.state.meal &&
+              <Shuffler data={this.state.meal} />
+            }
+            <button onClick={this.fetchMealDrink}>Get a Combo</button>
+          </div>)}
 
       </div>
     )

@@ -5,8 +5,9 @@ import Header from './components/Header'
 import Login from './components/Login'
 import MakeCombo from './components/MakeCombo'
 import ComboBoard from './components/ComboBoard'
+import Nav from './components/Nav'
 import { createCombo, deleteCombo } from './services/combos'
-import { Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 import {
   createUser,
   verifyToken,
@@ -102,6 +103,7 @@ class App extends React.Component {
       currentUser: user,
       currentView: 'welcome'
     })
+    this.props.history.push('/home');
     console.log(user);
   }
 
@@ -146,6 +148,7 @@ class App extends React.Component {
       currentUser: user,
       currentView: 'welcome'
     });
+    this.props.history.push('/home');
   }
 
   // changeBoard = () => {
@@ -195,34 +198,38 @@ class App extends React.Component {
             />} />
         </main>
         <div>
-          {this.state.currentView === 'welcome' && this.state.currentUser && (
+          {this.state.currentUser && (
             <>
-              <p>Hello {this.state.currentUser.name}!</p>
-              <MakeCombo
-                isLoggedIn={this.state.isLoggedIn}
-                currentView={this.state.currentView}
-                loginFormData={this.state.loginFormData}
-                handleLogout={this.handleLogout}
-                meal={this.state.meal}
-                fetchMealDrink={this.fetchMealDrink}
-                changeBoard={this.changeBoard}
-              />
-            </>
+              <Route path="/home" render={() => (
+                <>
 
+                  <p>Hello {this.state.currentUser.name}!</p>
+                  <MakeCombo
+                    isLoggedIn={this.state.isLoggedIn}
+                    currentView={this.state.currentView}
+                    loginFormData={this.state.loginFormData}
+                    handleLogout={this.handleLogout}
+                    meal={this.state.meal}
+                    fetchMealDrink={this.fetchMealDrink}
+                    changeBoard={this.changeBoard}
+                  />
+                </>
+              )} />
+
+              <Route path="/combo" render={() => (
+                <ComboBoard
+                  handleComboDelete={this.handleComboDelete}
+                  combos={this.state.combos}
+                />
+              )} />
+            </>
           )}
 
         </div>
-
-        <Route path="/combo" render={() =>
-          <ComboBoard
-            handleComboDelete={this.handleComboDelete}
-            combos={this.state.combos}
-          />
-        } />
 
       </div>
     )
   }
 }
 
-export default App;
+export default withRouter(App);

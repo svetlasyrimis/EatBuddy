@@ -6,7 +6,7 @@ function Nav(props) {
   return (
     <header>
       <nav id="nav-bar">
-        <Link to="/shuffler">Shuffler</Link>
+        <Link to="/home">Shuffler</Link>
         <Link to="/combo">Combo Board</Link>
         <a href="/#favorites-section">Favorites</a>
         <button onClick={props.handleLogout}>Log Out</button>

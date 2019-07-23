@@ -16,18 +16,20 @@ const User = sequelize.define('user', {
 
 const Combo = sequelize.define('combo', {
   food: Sequelize.STRING,
-  food_pic: Sequelize.STRING,
+  foodImage: Sequelize.STRING,
+  foodId: Sequelize.INTEGER,
   drink: Sequelize.STRING,
-  drink_pic: Sequelize.STRING,
+  drinkImage: Sequelize.STRING,
+  drinkId: Sequelize.INTEGER,
 });
 
 const Favorite = sequelize.define('favorite', {
-  
+
 });
 
 const Comment = sequelize.define('comment', {
   comment: Sequelize.STRING
-  
+
 })
 User.hasMany(Combo);
 User.hasMany(Comment);

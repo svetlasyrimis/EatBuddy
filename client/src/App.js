@@ -4,6 +4,8 @@ import './App.css';
 import Header from './components/Header'
 import Login from './components/Login'
 import MakeCombo from './components/MakeCombo'
+// import ComboBoard from './components/ComboBoard'
+import { createCombo } from './services/combos'
 import { Route } from 'react-router-dom'
 import {
   createUser,
@@ -23,6 +25,7 @@ class App extends React.Component {
     this.state = {
       currentView: 'login',
       currentUser: null,
+      combos: [],
       meal: {
         food: 'Food',
         foodImage: 'https://cdn0.iconfinder.com/data/icons/handdrawn-ui-elements/512/Question_Mark-512.png',
@@ -42,6 +45,14 @@ class App extends React.Component {
     }
   }
 
+  // comboList = async () => {
+  //   const combo = await createCombo(this.state.meal);
+  //   this.setState(prevState => ({
+  //     combos: [...prevState.combos, combo]
+
+  //   }))
+  // }
+
   fetchMealDrink = async () => {
     const drinkResp = await fetchDrink();
     // console.log(drinkResp)
@@ -51,12 +62,24 @@ class App extends React.Component {
       meal: {
         food: foodResp.strMeal,
         foodImage: foodResp.strMealThumb,
+        foodId: foodResp.idMeal,
         drink: drinkResp.strDrink,
-        drinkImage: drinkResp.strDrinkThumb
+        drinkImage: drinkResp.strDrinkThumb,
+        drinkId: drinkResp.idDrink
       }
     })
-    console.log(this.state.meal)
+    // const combo = await createCombo(this.state.meal);
+    // const comboMeal = await comboList();
+    const combo = await createCombo(this.state.meal);
+    this.setState(prevState => ({
+      combos: [...prevState.combos, combo]
+
+    }))
+    console.log(this.state.combos)
   }
+
+
+
 
   handleLoginFormChange = (ev) => {
     const { name, value } = ev.target;
@@ -167,6 +190,7 @@ class App extends React.Component {
 
           )}
         </div>
+
       </div>
     )
   }

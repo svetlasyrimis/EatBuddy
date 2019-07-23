@@ -5,12 +5,12 @@ const favoriteRouter = Router();
 
 favoriteRouter.get('/', (req, res) => {
   const favorites = Favorite.findAll()
-  res.json({ favorites});
+  res.json({ favorites });
 });
 
 favoriteRouter.post('/', async (req, res) => {
   const favorite = await Favorite.create(req.body);
-  console.log(favorite);
+  console.log(favorite.dataValues);
   res.json({ favorite });
 });
 
@@ -26,7 +26,7 @@ favoriteRouter.delete('/:id', async (req, res) => {
     console.log(e)
     res.status(401).send("Can't be deleted");
   }
-  
+
 })
 
 // favoriteRouter.put('id/:id', async (req, res) => {

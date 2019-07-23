@@ -10,7 +10,7 @@ function Nav(props) {
     <header>
       <nav id="nav-bar">
         <a href="/#home-section">Home</a>
-        <a href="/#recipes-section">Recipes</a>
+        <a href="/#comboBoard-section">Combo Board</a>
         <a href="/#favorites-section">Favorites</a>
         <button onClick={props.handleLogout}>Log Out</button>
       </nav>

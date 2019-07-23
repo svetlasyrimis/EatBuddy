@@ -1,6 +1,7 @@
 import React from 'react';
 import RegisterForm from './RegisterForm'
 import LoginForm from './LoginForm'
+import Header from './Header'
 
 
 
@@ -8,6 +9,7 @@ import LoginForm from './LoginForm'
 export default function Login(props) {
   return (
     <>
+
       {
         props.currentView === 'register' && (
           <>

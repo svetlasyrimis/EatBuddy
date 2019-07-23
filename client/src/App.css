@@ -30,6 +30,13 @@ header {
   background-image: linear-gradient(to right, white, white,rgb(200, 233, 245), rgb(200, 233, 245));
 }
 
+div p{
+  text-align: center;
+  font-size: 30px;
+  font-family: 'Lobster', cursive;
+
+}
+
 #nav-bar {
   width: 100%;
   position: fixed; 
@@ -107,6 +114,6 @@ header {
 
 /* Combo Board */
 
-.shuffler h4, li{
-  display: inline;
+.comboCard {
+  background-color: lightblue; 
 }

@@ -4,8 +4,8 @@ import './App.css';
 import Header from './components/Header'
 import Login from './components/Login'
 import MakeCombo from './components/MakeCombo'
-// import ComboBoard from './components/ComboBoard'
-import { createCombo } from './services/combos'
+import ComboBoard from './components/ComboBoard'
+import { createCombo, deleteCombo } from './services/combos'
 import { Route } from 'react-router-dom'
 import {
   createUser,
@@ -102,7 +102,7 @@ class App extends React.Component {
       currentUser: user,
       currentView: 'welcome'
     })
-    // console.log(user);
+    console.log(user);
   }
 
   handleLogout = (e) => {
@@ -148,6 +148,25 @@ class App extends React.Component {
     });
   }
 
+  // changeBoard = () => {
+  //   this.setState({
+  //     currentView: 'comboBoard'
+  //   })
+  // }
+
+  handleComboDelete = async (e) => {
+    e.preventDefault();
+    const comboId = e.target.name
+    console.log(comboId);
+    const res = await deleteCombo(comboId);
+
+    this.setState(prevState => ({
+      combos: prevState.combos.filter(combo =>
+        combo.id !== parseInt(comboId))
+    }))
+
+  }
+
 
   toggleAuthView = () => {
     this.setState(prevState => ({
@@ -176,20 +195,30 @@ class App extends React.Component {
             />} />
         </main>
         <div>
-          {this.state.currentView === 'welcome' && (
-
-            <MakeCombo
-              isLoggedIn={this.state.isLoggedIn}
-              currentView={this.state.currentView}
-              loginFormData={this.state.loginFormData}
-              handleLogout={this.handleLogout}
-              meal={this.state.meal}
-              fetchMealDrink={this.fetchMealDrink}
-            />
-
+          {this.state.currentView === 'welcome' && this.state.currentUser && (
+            <>
+              <p>Hello {this.state.currentUser.name}!</p>
+              <MakeCombo
+                isLoggedIn={this.state.isLoggedIn}
+                currentView={this.state.currentView}
+                loginFormData={this.state.loginFormData}
+                handleLogout={this.handleLogout}
+                meal={this.state.meal}
+                fetchMealDrink={this.fetchMealDrink}
+                changeBoard={this.changeBoard}
+              />
+            </>
 
           )}
+
         </div>
+
+        <Route path="/combo" render={() =>
+          <ComboBoard
+            handleComboDelete={this.handleComboDelete}
+            combos={this.state.combos}
+          />
+        } />
 
       </div>
     )

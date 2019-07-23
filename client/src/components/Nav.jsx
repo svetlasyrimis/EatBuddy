@@ -1,16 +1,13 @@
 import React from 'react'
-// import { Link, Route } from 'react-router-dom'
-
-
-
+import { Link } from 'react-router-dom'
 
 function Nav(props) {
 
   return (
     <header>
       <nav id="nav-bar">
-        <a href="/#home-section">Home</a>
-        <a href="/#comboBoard-section">Combo Board</a>
+        <Link to="/shuffler">Shuffler</Link>
+        <Link to="/combo">Combo Board</Link>
         <a href="/#favorites-section">Favorites</a>
         <button onClick={props.handleLogout}>Log Out</button>
       </nav>

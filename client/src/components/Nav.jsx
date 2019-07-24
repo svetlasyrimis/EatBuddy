@@ -9,7 +9,7 @@ function Nav(props) {
         <Link to="/home">Shuffler</Link>
         <Link to="/combo">Combo Board</Link>
         <a href="/#favorites-section">Favorites</a>
-        <button onClick={props.handleLogout}>Log Out</button>
+        <Link to="/"><button onClick={props.handleLogout}>Log Out</button></Link>
       </nav>
     </header>
   )

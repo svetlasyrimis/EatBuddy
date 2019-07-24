@@ -1,6 +1,8 @@
 import React from 'react';
 import Shuffler from './Shuffler';
 import Nav from './Nav';
+import { Route, Redirect } from 'react-router-dom'
+import MakeCombo from './MakeCombo'
 
 const ComboBoard = (props) => {
   return (
@@ -8,6 +10,12 @@ const ComboBoard = (props) => {
       <Nav
         handleLogout={props.handleLogout}
       />
+      {props.combos.length > 0 ?
+        <Redirect to="/combo" />
+        :
+        <>
+          <Redirect to="/home" />
+        </>}
       {props.combos && props.combos.map(combo => (
         <div key={combo.id}>
           <button name={combo.id} onClick={props.handleComboDelete}>Delete</button>

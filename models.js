@@ -15,10 +15,12 @@ const User = sequelize.define('user', {
 });
 
 const Combo = sequelize.define('combo', {
+  foodId: Sequelize.INTEGER,
   food: Sequelize.STRING,
-  food_pic: Sequelize.STRING,
+  foodImage: Sequelize.STRING,
+  drinkId: Sequelize.INTEGER,
   drink: Sequelize.STRING,
-  drink_pic: Sequelize.STRING,
+  drinkImage: Sequelize.STRING,
 });
 
 const Favorite = sequelize.define('favorite', {
@@ -28,17 +30,23 @@ const Favorite = sequelize.define('favorite', {
 const Comment = sequelize.define('comment', {
   comment: Sequelize.STRING
   
-})
+});
+
+User.belongsToMany(Combo, { as: 'Favorite', through: 'favorites', foreignKey: 'userId' })
+Combo.belongsToMany(User, { as: 'Favorite', through: 'favorites', foreignKey: 'comboId' })
+
+// User.belongsToMany(Combo, { as: 'Comment', through: 'comments', foreignKey: 'userId' })
+// Combo.belongsToMany(User, { as: 'Comment', through: 'comments', foreignKey: 'comboId' })
 User.hasMany(Combo);
-User.hasMany(Comment);
-User.hasMany(Favorite);
-Combo.hasMany(Comment);
-Combo.hasMany(Favorite);
+// User.hasMany(Comment);
+// User.hasMany(Favorite);
+// Combo.hasMany(Comment);
+// Combo.hasMany(Favorite);
+// Combo.belongsTo(User);
+// Comment.belongsTo(Combo);
 Combo.belongsTo(User);
-Comment.belongsTo(Combo);
-Comment.belongsTo(User);
-Favorite.belongsTo(User);
-Favorite.belongsTo(Combo);
+// Favorite.belongsTo(User);
+// Favorite.belongsTo(Combo);
 
 
 module.exports = {

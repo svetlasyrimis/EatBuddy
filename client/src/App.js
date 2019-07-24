@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchFood, fetchDrink } from './services/api-helper'
+import { fetchFood, fetchDrink, getFoodRecipe, getDrinkRecipe } from './services/api-helper'
 import './App.css';
 import Shuffler from './components/Shuffler'
 import Button from 'react-bootstrap/Button'
@@ -15,6 +15,7 @@ import {
   loginUser,
 
 } from './services/auth';
+import { createCombo, getALL } from './services/combos';
 
 
 
@@ -30,8 +31,10 @@ class App extends React.Component {
       meal: {
         food: 'Food',
         foodImage: 'https://cdn0.iconfinder.com/data/icons/handdrawn-ui-elements/512/Question_Mark-512.png',
+        foodId:'',
         drink: 'Drink',
-        drinkImage: 'https://cdn0.iconfinder.com/data/icons/handdrawn-ui-elements/512/Question_Mark-512.png'
+        drinkImage: 'https://cdn0.iconfinder.com/data/icons/handdrawn-ui-elements/512/Question_Mark-512.png',
+        drinkId:''
       },
 
       loginFormData: {
@@ -42,10 +45,12 @@ class App extends React.Component {
         name: '',
         password: '',
         email: ''
-      }
+      },
+      combos: []
     }
   }
 
+ 
   fetchMealDrink = async () => {
     const drinkResp = await fetchDrink();
     // console.log(drinkResp)
@@ -55,12 +60,34 @@ class App extends React.Component {
       meal: {
         food: foodResp.strMeal,
         foodImage: foodResp.strMealThumb,
+        foodId: foodResp.idMeal,
         drink: drinkResp.strDrink,
-        drinkImage: drinkResp.strDrinkThumb
+        drinkImage: drinkResp.strDrinkThumb,
+        drinkId: drinkResp.idDrink
       }
     })
-    console.log(this.state.meal)
+    const combo = createCombo(this.state.meal);
+    this.setState(prevState => ({
+      combos: [...prevState.combos, combo]
+    }));
+    console.log(this.state.combos)
   }
+  componentDidMount = async () => {
+    const user = await verifyToken();
+    const all = await getALL();
+    if (user) {
+      this.setState({
+        currentUser: user
+      })
+    }
+    console.log(this.state.currentUser)
+  }
+    // const recipe = await getFoodRecipe(52772);
+    // const drinkrecipe = await getDrinkRecipe(12802)
+    // const result = `Food recipe ${recipe}; Drink recipe ${drinkrecipe}`
+    // console.log(result)
+  
+  //works gets the recipes
 
   handleLoginFormChange = (ev) => {
     const { name, value } = ev.target;
@@ -96,7 +123,7 @@ class App extends React.Component {
       }
     }));
   }
-
+  
   handleRegisterSubmit = async (ev) => {
     ev.preventDefault();
     const user = await createUser(this.state.registerFormData);

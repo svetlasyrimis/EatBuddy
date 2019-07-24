@@ -121,6 +121,8 @@ class App extends React.Component {
       }
 
     })
+    console.log(this.state.currentView)
+    this.props.history.push('/');
   }
 
 
@@ -184,18 +186,20 @@ class App extends React.Component {
 
         <Header />
         <main>
-          <Route path="/" exact render={() =>
+          <>
+            <Route path="/" exact render={() =>
 
-            <Login
-              currentView={this.state.currentView}
-              registerFormData={this.state.registerFormData}
-              handleRegisterSubmit={this.handleRegisterSubmit}
-              handleRegisterFormChange={this.handleRegisterFormChange}
-              toggleAuthView={this.toggleAuthView}
-              loginFormData={this.state.loginFormData}
-              handleLoginSubmit={this.handleLoginSubmit}
-              handleLoginFormChange={this.handleLoginFormChange}
-            />} />
+              <Login
+                currentView={this.state.currentView}
+                registerFormData={this.state.registerFormData}
+                handleRegisterSubmit={this.handleRegisterSubmit}
+                handleRegisterFormChange={this.handleRegisterFormChange}
+                toggleAuthView={this.toggleAuthView}
+                loginFormData={this.state.loginFormData}
+                handleLoginSubmit={this.handleLoginSubmit}
+                handleLoginFormChange={this.handleLoginFormChange}
+              />} />
+          </>
         </main>
         <div>
           {this.state.currentUser && (

@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const { Combo } = require('../models');
-
+const { Combo,User } = require('../models');
+const { restrict } = require('../auth');
 const comboRouter = Router();
 
 comboRouter.get('/', (req, res) => {
@@ -13,13 +13,20 @@ comboRouter.get('/all', async (req, res) => {
   res.json({ combos });
 });
 
-comboRouter.post('/', async (req, res) => {
+comboRouter.post('/', restrict, async (req, res) => {
+  console.log(req.body)
+  
   const combo = await Combo.create(req.body);
-  console.log(combo.dataValues);
+  const user = await User.findByPk(res.locals.id);
+  console.log(user.id);
+  // console.log(name)
+  const answer = await combo.setUser(user);
+  console.log(answer.dataValues);
+  // console.log(combo);
   res.json({ combo });
 });
 
-comboRouter.delete('/:id', async (req, res) => {
+comboRouter.delete('/:id', restrict ,async (req, res) => {
   try {
     await Combo.destroy({
       where: {

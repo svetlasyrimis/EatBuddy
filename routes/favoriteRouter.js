@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const { Favorite } = require('../models');
-
+const { Favorite,User,Combo } = require('../models');
+const { restrict } = require('../auth');
 const favoriteRouter = Router();
 
 favoriteRouter.get('/', (req, res) => {
@@ -8,9 +8,11 @@ favoriteRouter.get('/', (req, res) => {
   res.json({ favorites });
 });
 
-favoriteRouter.post('/', async (req, res) => {
-  const favorite = await Favorite.create(req.body);
-  console.log(favorite.dataValues);
+favoriteRouter.post('/', restrict, async (req, res) => {
+  const user = User.findByPk(res.locals.id);
+  const combo = Combo
+  const favorite = await user.addCombo(combo)
+  console.log(favorite);
   res.json({ favorite });
 });
 
@@ -28,6 +30,7 @@ favoriteRouter.delete('/:id', async (req, res) => {
   }
 
 })
+
 
 // favoriteRouter.put('id/:id', async (req, res) => {
 //   try {

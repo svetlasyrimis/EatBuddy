@@ -1,4 +1,4 @@
-const { Router } = require('./auth');
+const { Router } = require('express');
 const { Comment } = require('../models');
 // const {restrict} = require('../auth')  gonna pass this as middleware when ready with logins
 

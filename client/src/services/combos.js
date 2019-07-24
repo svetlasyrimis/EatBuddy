@@ -9,3 +9,9 @@ export const deleteCombo = async (id) => {
   const resp = await api.delete(`/combos/${id}`);
   return resp.data
 }
+
+export const getALL = async () => {
+  const resp = await api.get(`combos/all`);
+  console.log(resp.data)
+  return resp.data
+}

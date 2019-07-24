@@ -119,3 +119,36 @@ div p{
 .comboCard {
   background-color: lightblue; 
 }
+
+.row {
+  background-color: white; 
+  border-radius: 50px 50px 50px 50px; 
+  padding-top: 45px; 
+  padding-bottom: 10px; 
+}
+
+.boardCard button {
+  align-content: center;
+  text-align: center;
+  font-family: 'Lobster', cursive;
+  font-size: 20px; 
+  width: 10%;  
+  justify-content: space-around;
+  margin-top: 45px; 
+  background-color: white;
+}
+.boardCard .heart {
+  height: 30px;
+  width: 30px; 
+  
+}
+
+.boardCard button .heart {
+  
+}
+
+div .boardCard {
+  padding-top: 30px; 
+  
+  
+}

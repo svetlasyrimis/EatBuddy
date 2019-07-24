@@ -5,8 +5,9 @@ import Header from './components/Header'
 import Login from './components/Login'
 import MakeCombo from './components/MakeCombo'
 import ComboBoard from './components/ComboBoard'
+import AllCombos from './components/AllCombos'
 import Nav from './components/Nav'
-import { createCombo, deleteCombo } from './services/combos'
+import { createCombo, deleteCombo, getALL } from './services/combos'
 import { Route, withRouter } from 'react-router-dom'
 import {
   createUser,
@@ -14,9 +15,6 @@ import {
   loginUser,
 
 } from './services/auth';
-
-
-
 
 
 class App extends React.Component {
@@ -27,6 +25,7 @@ class App extends React.Component {
       currentView: 'login',
       currentUser: null,
       combos: [],
+      allcombos: [],
       meal: {
         food: 'Food',
         foodImage: 'https://cdn0.iconfinder.com/data/icons/handdrawn-ui-elements/512/Question_Mark-512.png',
@@ -45,14 +44,6 @@ class App extends React.Component {
       }
     }
   }
-
-  // comboList = async () => {
-  //   const combo = await createCombo(this.state.meal);
-  //   this.setState(prevState => ({
-  //     combos: [...prevState.combos, combo]
-
-  //   }))
-  // }
 
   fetchMealDrink = async () => {
     const drinkResp = await fetchDrink();
@@ -153,11 +144,15 @@ class App extends React.Component {
     this.props.history.push('/home');
   }
 
-  // changeBoard = () => {
-  //   this.setState({
-  //     currentView: 'comboBoard'
-  //   })
-  // }
+  handleViewCombos = async () => {
+
+    const combos = await getALL();
+    this.setState({
+      allcombos: combos.combos
+    })
+    console.log(this.state.allcombos)
+  }
+
 
   handleComboDelete = async (e) => {
     e.preventDefault();
@@ -169,7 +164,6 @@ class App extends React.Component {
       combos: prevState.combos.filter(combo =>
         combo.id !== parseInt(comboId))
     }))
-
   }
 
 
@@ -224,6 +218,13 @@ class App extends React.Component {
                 <ComboBoard
                   handleComboDelete={this.handleComboDelete}
                   combos={this.state.combos}
+                  handleViewCombos={this.handleViewCombos}
+                />
+              )} />
+
+              <Route path="/allcombos" render={() => (
+                <AllCombos
+                  allcombos={this.state.allcombos}
                 />
               )} />
 

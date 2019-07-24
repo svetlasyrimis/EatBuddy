@@ -29,6 +29,7 @@ export const loginUser = async (userData) => {
 
 export const verifyToken = async () => {
   const token = localStorage.getItem('authToken');
+  console.log(token)
   if (token !== null) {
     try {
       const resp = await api.get('/users/verify', {

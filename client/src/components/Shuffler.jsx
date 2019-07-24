@@ -11,14 +11,14 @@ const Shuffler = (props) => {
     <>
       <Container >
         <Row>
-          <Col md={{ span: 3, offset: 3 }}>
+          <Col xs={{ span: 3, offset: 3 }}>
             <CrossfadeImage src={foodImage} style={{ maxWidth: "100%", borderRadius: "20%" }}
               timingFunction={"ease-in-out"}
               duration={800}
               alt="food" />
             <p>{food}</p>
           </Col>
-          <Col md={{ span: 3, offset: -3 }}>
+          <Col xs={{ span: 3, offset: -3 }}>
             <CrossfadeImage src={drinkImage} style={{ maxWidth: "100%", borderRadius: "20%" }}
               timingFunction={"ease-in-out"}
               duration={800}

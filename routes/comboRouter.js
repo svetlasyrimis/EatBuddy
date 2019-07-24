@@ -9,7 +9,7 @@ comboRouter.get('/', (req, res) => {
 
 comboRouter.get('/all', async (req, res) => {
   const combos = await Combo.findAll();
-  
+
   res.json({ combos });
 });
 
@@ -38,7 +38,7 @@ comboRouter.delete('/:id', restrict ,async (req, res) => {
     console.log(e)
     res.status(401).send("Can't be deleted");
   }
-  
+
 })
 
 comboRouter.put('id/:id', async (req, res) => {
@@ -46,7 +46,7 @@ comboRouter.put('id/:id', async (req, res) => {
     const id = req.params.id;
     const data = req.body;
     await Combo.update(
-      data,{
+      data, {
         where: {
           id
         },

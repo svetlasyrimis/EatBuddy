@@ -22,12 +22,19 @@
 }
 
 header {
-  margin-top: 45px;
+  margin-top: 0px;
   display: flex; 
   align-content: center;
   text-align: center;
   border-bottom: 5px solid black; 
   background-image: linear-gradient(to right, white, white,rgb(200, 233, 245), rgb(200, 233, 245));
+}
+
+div p{
+  text-align: center;
+  font-size: 30px;
+  font-family: 'Lobster', cursive;
+
 }
 
 #nav-bar {
@@ -39,6 +46,7 @@ header {
   display: flex;
   align-items: center;
   top: 0;
+  
 }
 
 #nav-bar a{
@@ -47,6 +55,7 @@ header {
   font-family: 'Lobster', cursive;
   color: black;
   font-size: 30px;
+  
 }
 
 #nav-bar a:hover{
@@ -101,4 +110,10 @@ header {
 .button{
   align-content: center;
   text-align: center;
+}
+
+/* Combo Board */
+
+.comboCard {
+  background-color: lightblue; 
 }

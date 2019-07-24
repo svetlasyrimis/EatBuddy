@@ -18,13 +18,14 @@ const Combo = sequelize.define('combo', {
   foodId: Sequelize.INTEGER,
   food: Sequelize.STRING,
   foodImage: Sequelize.STRING,
-  drinkId: Sequelize.INTEGER,
+  foodId: Sequelize.INTEGER,
   drink: Sequelize.STRING,
   drinkImage: Sequelize.STRING,
+  drinkId: Sequelize.INTEGER,
 });
 
 const Favorite = sequelize.define('favorite', {
-  
+
 });
 
 const Comment = sequelize.define('comment', {

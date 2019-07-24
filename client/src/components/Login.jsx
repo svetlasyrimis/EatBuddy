@@ -1,6 +1,8 @@
 import React from 'react';
 import RegisterForm from './RegisterForm'
 import LoginForm from './LoginForm'
+import Header from './Header'
+
 
 
 

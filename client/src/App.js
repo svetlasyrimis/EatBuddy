@@ -14,7 +14,7 @@ import {
   loginUser,
 
 } from './services/auth';
-import { createCombo, getALL } from './services/combos';
+import {  getALL } from './services/combos';
 
 
 
@@ -50,13 +50,6 @@ class App extends React.Component {
     }
   }
 
-  // comboList = async () => {
-  //   const combo = await createCombo(this.state.meal);
-  //   this.setState(prevState => ({
-  //     combos: [...prevState.combos, combo]
-
-  //   }))
-  // }
 
   fetchMealDrink = async () => {
     const drinkResp = await fetchDrink();
@@ -73,7 +66,7 @@ class App extends React.Component {
         drinkId: drinkResp.idDrink
       }
     })
-    const combo = createCombo(this.state.meal);
+    const combo = await createCombo(this.state.meal);
     this.setState(prevState => ({
       combos: [...prevState.combos, combo]
     }));

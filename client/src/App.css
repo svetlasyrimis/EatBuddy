@@ -137,18 +137,10 @@ div p{
   margin-top: 45px; 
   background-color: white;
 }
-.boardCard .heart {
-  height: 30px;
-  width: 30px; 
-  
+
+.comboCard button{
+  font-family: 'Lobster', cursive;
+  font-size: 20px; 
 }
 
-.boardCard button .heart {
-  
-}
 
-div .boardCard {
-  padding-top: 30px; 
-  
-  
-}

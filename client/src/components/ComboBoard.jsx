@@ -44,6 +44,7 @@ const ComboBoard = (props) => {
 
         </div>
       ))}
+
     </div>
   )
 }

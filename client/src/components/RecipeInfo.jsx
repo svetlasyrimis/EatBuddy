@@ -1,6 +1,10 @@
 import React from 'react';
+import Nav from './Nav';
 
 class RecipeInfo extends React.Component {
+  constructor(props) {
+    super(props)
+  }
 
   componentDidMount = async () => {
   }
@@ -9,6 +13,8 @@ class RecipeInfo extends React.Component {
   render() {
     return (
       <>
+        <Nav
+          handleLogout={this.props.handleLogout} />
         <div>
           <h1>Meal Recipe Info</h1>
           <p>{this.props.currentCombo.meal.strMeal}</p>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { fetchFood, fetchDrink, fetchMealId, fetchDrinkId } from './services/api-helper'
-import { fetchFood, fetchDrink} from './services/api-helper'
 import './App.css';
 import Header from './components/Header'
 import Login from './components/Login'
@@ -9,8 +8,6 @@ import ComboBoard from './components/ComboBoard'
 
 import Nav from './components/Nav'
 import RecipeInfo from './components/RecipeInfo'
-import { createCombo, deleteCombo } from './services/combos'
-
 import AllCombos from './components/AllCombos'
 import { createCombo, deleteCombo, getALL, fetchUserCombos} from './services/combos'
 
@@ -21,8 +18,6 @@ import {
   loginUser,
 
 } from './services/auth';
-
-import { getALL } from './services/combos';
 
 
 
@@ -48,7 +43,8 @@ class App extends React.Component {
         foodId:'',
         drink: 'Drink',
         drinkImage: 'https://cdn0.iconfinder.com/data/icons/handdrawn-ui-elements/512/Question_Mark-512.png',
-        drinkId:''
+        drinkId: '',
+        isLiked: undefined
       },
 
       loginFormData: {
@@ -77,23 +73,16 @@ class App extends React.Component {
         drink: drinkResp.strDrink,
         drinkImage: drinkResp.strDrinkThumb,
         drinkId: drinkResp.idDrink,
-        isLiked: undefined
       }
     })
     const combo = await createCombo(this.state.meal);
-
-
-    this.setState({
-
-    })
-
     this.setState(prevState => ({
       combos: [...prevState.combos, combo]
     }));
     console.log(this.state.combos)
   }
 
-
+  
   getComboRecipes = async (comboId) => {
     const currentCombo = this.state.combos.find(combo => combo.id === comboId)
     const comboFoodItem = await fetchMealId(currentCombo.foodId)
@@ -107,13 +96,6 @@ class App extends React.Component {
     this.props.history.push(`/recipe/${currentCombo.id}`)
   }
 
-  // update = async (id) => {
-  //   const id = this.
-  //   const combo = this.state.meal;
-  //   const resp = await 
-  // }
-
-  
   componentDidMount = async () => {
     
     const user = await verifyToken();
@@ -128,16 +110,7 @@ class App extends React.Component {
     }
     console.log(this.state.currentUser)
   }
-    // const recipe = await getFoodRecipe(52772);
-    // const drinkrecipe = await getDrinkRecipe(12802)
-    // const result = `Food recipe ${recipe}; Drink recipe ${drinkrecipe}`
-    // console.log(result)
   
-  //works gets the recipes
-
-
-
-
 
   handleLoginFormChange = (ev) => {
     const { name, value } = ev.target;
@@ -162,8 +135,9 @@ class App extends React.Component {
     })
     this.props.history.push('/home');
     // console.log(user);
-    const resp = await fetchUserCombos();
-    console.log(resp)
+    const resp = await fetchUserCombos(this.state.currentUser.id);
+    console.log(resp.data)
+    
   }
 
   handleLogout = (e) => {
@@ -224,7 +198,7 @@ class App extends React.Component {
     
     const resp = await axios.put(`http://localhost:3005/combos/${comboId}`,this.state.meal);
     debugger;
-    console.log(resp.data)
+    console.log(resp.data.combo)
     
   }
 

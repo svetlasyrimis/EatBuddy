@@ -8,7 +8,7 @@ const ComboDetails = (props) => {
      
       <Shuffler data={props.combo}/>
     <button name="Comments">Comments</button>
-      <button name={props.combo.id} onClick={props.handleComboUpdate} variant="info">Info</button></div>
+      <button name={props.combo.id} onClick={props.handleComboUpdate} variant="info">Like</button></div>
   )
 }
 

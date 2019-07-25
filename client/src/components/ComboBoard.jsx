@@ -29,18 +29,15 @@ const ComboBoard = (props) => {
       {props.combos && props.combos.map(combo => (
 
         <div key={combo.id}>
-          <button name={combo.id} onClick={props.handleComboDelete}>Delete</button>
-          <button name={combo.id} onClick={() => {
-            props.getComboRecipes(combo.id)
-          }}>Get Info</button>
 
         <div className="boardCard" key={combo.id}>
 
           <Shuffler data={combo} />
-          <button name={combo.id} onClick={props.handleComboDelete}>Delete</button>
-          <div>
+          <button name={combo.id} onClick={props.handleComboDelete}>Delete</button> <button name={combo.id} onClick={() => {
+            props.getComboRecipes(combo.id)
+          }}>Get Info</button>
           <button name={combo.id} onClick={props.handleComboUpdate} variant="info">Like</button></div>
-          <Link to='/combodetails'><Button>View Details</Button></Link> 
+         
           
 
 

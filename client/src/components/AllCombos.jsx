@@ -17,7 +17,7 @@ const AllCombos = (props) => {
           <div className="boardCard" key={combo.id}>
             <Shuffler data={combo} />
             <button name="Comments">Comments</button>
-            <button name="faves"><img className="heart" src={"https://i.imgur.com/2UeMQie.jpg"} /></button>
+            <button name="faves"><img className="heart" src={"https://i.imgur.com/2UeMQie.jpg"} alt="heart"/></button>
           </div>
         ))}
       </div>

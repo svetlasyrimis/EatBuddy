@@ -2,7 +2,7 @@ import React from 'react';
 import Shuffler from './Shuffler';
 import Nav from './Nav';
 import { Link, withRouter, Redirect } from 'react-router-dom'
-import MakeCombo from './MakeCombo'
+import Button from 'react-bootstrap/Button'
 
 const ComboBoard = (props) => {
   return (
@@ -26,8 +26,10 @@ const ComboBoard = (props) => {
         <div className="boardCard" key={combo.id}>
           <Shuffler data={combo} />
           <button name={combo.id} onClick={props.handleComboDelete}>Delete</button>
-          <button name="Comments">Comments</button>
-          <button name="faves"><img className="heart" src={"https://i.imgur.com/2UeMQie.jpg"} /></button>
+          <div>
+          <button name={combo.id} onClick={props.handleComboUpdate} variant="info">Like</button></div>
+          <Link to='/combodetails'><Button>View Details</Button></Link> 
+          
 
 
         </div>

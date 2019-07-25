@@ -11,7 +11,6 @@ const storeToken = (token) => {
   api.defaults.headers.common.authorization = `Bearer ${token}`;
 }
 
-
 export const createUser = async (userData) => {
   const resp = await api.post('/users', userData);
   const { user, token } = resp.data;
@@ -38,6 +37,7 @@ export const verifyToken = async () => {
         }
       });
       storeToken(token);
+
       return resp.data.user;
     } catch (e) {
       console.log(e.message);

@@ -51,6 +51,10 @@ div p{
   
 }
 
+.heart {
+  color: red;
+}
+
 #nav-bar a{
   justify-content: space-between;
   text-decoration: none;
@@ -143,9 +147,7 @@ div p{
   
 }
 
-.boardCard button .heart {
-  
-}
+
 
 div .boardCard {
   padding-top: 30px; 

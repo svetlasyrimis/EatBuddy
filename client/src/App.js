@@ -53,6 +53,8 @@ class App extends React.Component {
         password: '',
         email: ''
       },
+      isToggleOn: true,
+      bgColor:''
     }
   }
 
@@ -189,6 +191,7 @@ class App extends React.Component {
     this.props.history.push('/home');
   }
 
+  
   handleComboUpdate = async (e) => {
     e.preventDefault();
     const comboId = e.target.name
@@ -196,12 +199,10 @@ class App extends React.Component {
     this.setState({
       meal: {
         isLiked: !this.state.meal.isLiked
-      }
-    })
-    
+      },
+      bgColor: 'lightblue'
+    });
     const resp = await axios.put(`http://localhost:3005/combos/${comboId}`,this.state.meal);
-    debugger;
-    console.log(resp.data.combo)
     
   }
 
@@ -280,13 +281,14 @@ class App extends React.Component {
 
                   getComboRecipes={this.getComboRecipes}
                   handleComboDelete={this.handleComboDelete}
-
+                  isToggleOn={this.state.isToggleOn}
                   
 
                   combos={this.state.combos}
                   handleViewCombos={this.handleViewCombos}
                   handleComboDelete={this.handleComboDelete}
                   handleComboUpdate={this.handleComboUpdate}
+                  bgColor={this.state.bgColor}
                 />
               )} />
 

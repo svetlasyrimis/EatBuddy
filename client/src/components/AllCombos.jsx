@@ -5,7 +5,7 @@ import Shuffler from './Shuffler'
 const AllCombos = (props) => {
 
   return (
-    <div>
+    <div className="comboHeaders">
       <h4>All Combos</h4>
 
       <div className="allCombos">

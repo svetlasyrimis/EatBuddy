@@ -8,7 +8,7 @@ import ComboBoard from './components/ComboBoard'
 import Nav from './components/Nav'
 import RecipeInfo from './components/RecipeInfo'
 import AllCombos from './components/AllCombos'
-import { createCombo, deleteCombo, getALL, fetchUserCombos} from './services/combos'
+import { createCombo, deleteCombo, getALL, fetchUserCombos } from './services/combos'
 
 import { Route, withRouter } from 'react-router-dom'
 import {
@@ -36,10 +36,10 @@ class App extends React.Component {
       allcombos: [],
       meal: {
         food: 'Food',
-        foodImage: 'https://cdn0.iconfinder.com/data/icons/handdrawn-ui-elements/512/Question_Mark-512.png',
-        foodId:'',
+        foodImage: 'https://i.imgur.com/A8GTchf.png',
+        foodId: '',
         drink: 'Drink',
-        drinkImage: 'https://cdn0.iconfinder.com/data/icons/handdrawn-ui-elements/512/Question_Mark-512.png',
+        drinkImage: 'https://i.imgur.com/A8GTchf.png',
         drinkId: '',
         isLiked: undefined
       },
@@ -79,7 +79,7 @@ class App extends React.Component {
     console.log(this.state.combos)
   }
 
-  
+
   getComboRecipes = async (comboId) => {
     const currentCombo = this.state.combos.find(combo => combo.id === comboId)
     const comboFoodItem = await fetchMealId(currentCombo.foodId)
@@ -94,20 +94,20 @@ class App extends React.Component {
   }
 
   componentDidMount = async () => {
-    
+
     const user = await verifyToken();
-    
+
     if (user) {
-      
-   
+
+
       this.setState({
         currentUser: user
-      
+
       })
     }
     console.log(this.state.currentUser)
   }
-  
+
 
   handleLoginFormChange = (ev) => {
     const { name, value } = ev.target;
@@ -134,7 +134,7 @@ class App extends React.Component {
     // console.log(user);
     const resp = await fetchUserCombos(this.state.currentUser.id);
     console.log(resp.data)
-    
+
   }
 
   handleLogout = (e) => {
@@ -166,7 +166,7 @@ class App extends React.Component {
       }
     }));
   }
-  
+
   handleRegisterSubmit = async (ev) => {
     ev.preventDefault();
     const user = await createUser(this.state.registerFormData);
@@ -192,11 +192,11 @@ class App extends React.Component {
         isLiked: true
       }
     })
-    
-    const resp = await axios.put(`http://localhost:3005/combos/${comboId}`,this.state.meal);
+
+    const resp = await axios.put(`http://localhost:3005/combos/${comboId}`, this.state.meal);
     debugger;
     console.log(resp.data.combo)
-    
+
   }
 
   handleViewCombos = async () => {
@@ -274,8 +274,8 @@ class App extends React.Component {
 
                   getComboRecipes={this.getComboRecipes}
                   handleComboDelete={this.handleComboDelete}
+                  handleLogout={this.handleLogout}
 
-                  
 
                   combos={this.state.combos}
                   handleViewCombos={this.handleViewCombos}
@@ -286,6 +286,7 @@ class App extends React.Component {
 
               <Route path="/allcombos" render={() => (
                 <AllCombos
+                  handleLogout={this.handleLogout}
                   allcombos={this.state.allcombos}
                 />
               )} />
@@ -293,11 +294,12 @@ class App extends React.Component {
                 <ComboDetails
                   combo={this.state.meal}
                   handleComboUpdate={this.handleComboUpdate}
-                  
+
                 />
               )} />
               <Route path="/recipe/:id" render={() => (
                 <RecipeInfo
+                  handleLogout={this.handleLogout}
                   currentCombo={this.state.currentCombo}
                 />
               )} />

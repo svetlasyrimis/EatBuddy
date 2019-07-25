@@ -39,10 +39,10 @@ class App extends React.Component {
       allcombos: [],
       meal: {
         food: 'Food',
-        foodImage: 'https://cdn0.iconfinder.com/data/icons/handdrawn-ui-elements/512/Question_Mark-512.png',
+        foodImage: 'https://i.imgur.com/A8GTchf.png',
         foodId: '',
         drink: 'Drink',
-        drinkImage: 'https://cdn0.iconfinder.com/data/icons/handdrawn-ui-elements/512/Question_Mark-512.png',
+        drinkImage: 'https://i.imgur.com/A8GTchf.png',
         drinkId: '',
         isLiked: undefined
       },

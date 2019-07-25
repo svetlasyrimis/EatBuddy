@@ -11,8 +11,6 @@
   margin-right: 180px;
   margin-top: 15px;
   padding-top: 50px; 
-  
-
 }
 
 .header header img {
@@ -97,7 +95,6 @@ div p{
 
 .reg{
   display: flex; 
-  flex-direction: column;
   width: 200px; 
   margin: 0 auto;
 
@@ -128,6 +125,7 @@ div p{
   box-shadow: 10px 10px 5px grey;
   
 }
+
 .container{
   margin-top: 15px; 
   margin-bottom: 40px; 
@@ -139,7 +137,7 @@ div p{
 }
 
 .shuffler h2 {
-  font-family: 'Lobster', cursive;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
 .boardCard button {
@@ -256,4 +254,9 @@ div p{
   font-family: 'Lobster', cursive;
   font-size: 22px;
   margin-top: 10px;
+}
+
+.shuffler button {
+  font-family: 'Lobster', cursive;
+  font-size: 20px;
 }

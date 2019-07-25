@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { api } from './auth'
 
 
 const drinkRecipeURL = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i='
@@ -27,4 +26,5 @@ export const getDrinkRecipe = async (id) => {
   console.log(resp.data.drinks[0])
   return resp.data.drinks[0].strInstructions
 }
+
 

@@ -16,5 +16,21 @@ export const createCombo = async (comboData) => {
 export const deleteCombo = async (id) => {
   const resp = await api.delete(`/combos/${id}`);
   return resp.data
+
+}
+
+export const fetchUserCombos = async (id) => {
+  const resp = await api.get(`/users/${id}/combos`);
+ 
+  return resp.data.combos;
 };
+// export const getComboForUpdate = async()  => {
+//   const resp = await api.get(`/combos/${id}`);
+//   return resp.data
+// }
+
+
+
+
+
 

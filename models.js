@@ -22,7 +22,15 @@ const Combo = sequelize.define('combo', {
   drink: Sequelize.STRING,
   drinkImage: Sequelize.STRING,
   drinkId: Sequelize.INTEGER,
-  isLiked: {type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false} 
+  isLiked: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+    allowNull: false,
+    set: function(value) {
+      if (value === 'true') value = true;
+      if (value === 'false') value = false;
+      this.setDataValue('isLiked', value);
+    }} 
 });
 
 

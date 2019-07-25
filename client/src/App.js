@@ -1,12 +1,12 @@
 import React from 'react';
-import { fetchFood, fetchDrink, getFoodRecipe, getDrinkRecipe } from './services/api-helper'
+import { fetchFood, fetchDrink} from './services/api-helper'
 import './App.css';
 import Header from './components/Header'
 import Login from './components/Login'
 import MakeCombo from './components/MakeCombo'
 import ComboBoard from './components/ComboBoard'
-import Nav from './components/Nav'
-import { createCombo, deleteCombo } from './services/combos'
+import AllCombos from './components/AllCombos'
+import { createCombo, deleteCombo, getALL, fetchUserCombos} from './services/combos'
 import { Route, withRouter } from 'react-router-dom'
 import {
   createUser,
@@ -14,9 +14,14 @@ import {
   loginUser,
 
 } from './services/auth';
+
 import { getALL } from './services/combos';
 
 
+
+
+import ComboDetails from './components/ComboDetails';
+import axios from 'axios';
 
 
 
@@ -28,6 +33,7 @@ class App extends React.Component {
       currentView: 'login',
       currentUser: null,
       combos: [],
+      allcombos: [],
       meal: {
         food: 'Food',
         foodImage: 'https://cdn0.iconfinder.com/data/icons/handdrawn-ui-elements/512/Question_Mark-512.png',
@@ -46,17 +52,9 @@ class App extends React.Component {
         password: '',
         email: ''
       },
-      combos: []
     }
   }
 
-  // comboList = async () => {
-  //   const combo = await createCombo(this.state.meal);
-  //   this.setState(prevState => ({
-  //     combos: [...prevState.combos, combo]
-
-  //   }))
-  // }
 
   fetchMealDrink = async () => {
     const drinkResp = await fetchDrink();
@@ -70,21 +68,40 @@ class App extends React.Component {
         foodId: foodResp.idMeal,
         drink: drinkResp.strDrink,
         drinkImage: drinkResp.strDrinkThumb,
-        drinkId: drinkResp.idDrink
+        drinkId: drinkResp.idDrink,
+        isLiked: undefined
       }
     })
     const combo = await createCombo(this.state.meal);
+
+
+    this.setState({
+
+    })
+
     this.setState(prevState => ({
       combos: [...prevState.combos, combo]
     }));
     console.log(this.state.combos)
   }
+
+  // update = async (id) => {
+  //   const id = this.
+  //   const combo = this.state.meal;
+  //   const resp = await 
+  // }
+
+  
   componentDidMount = async () => {
+    
     const user = await verifyToken();
-    const all = await getALL();
+    
     if (user) {
+      
+   
       this.setState({
         currentUser: user
+      
       })
     }
     console.log(this.state.currentUser)
@@ -121,13 +138,15 @@ class App extends React.Component {
       currentView: 'welcome'
     })
     this.props.history.push('/home');
-    console.log(user);
+    // console.log(user);
+    const resp = await fetchUserCombos();
+    console.log(resp)
   }
 
   handleLogout = (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('authToken')
-    const sign = localStorage.removeItem('authToken')
+    localStorage.getItem('authToken')
+    localStorage.removeItem('authToken')
     this.setState({
       isLoggedIn: false,
       currentView: 'login',
@@ -170,23 +189,42 @@ class App extends React.Component {
     this.props.history.push('/home');
   }
 
-  // changeBoard = () => {
-  //   this.setState({
-  //     currentView: 'comboBoard'
-  //   })
-  // }
+  handleComboUpdate = async (e) => {
+    e.preventDefault();
+    const comboId = e.target.name
+    console.log(comboId)
+    this.setState({
+      meal: {
+        isLiked: true
+      }
+    })
+    
+    const resp = await axios.put(`http://localhost:3005/combos/${comboId}`,this.state.meal);
+    debugger;
+    console.log(resp.data)
+    
+  }
+
+  handleViewCombos = async () => {
+
+    const combos = await getALL();
+    this.setState({
+      allcombos: combos.combos
+    })
+    console.log(this.state.allcombos)
+  }
+
 
   handleComboDelete = async (e) => {
     e.preventDefault();
     const comboId = e.target.name
     console.log(comboId);
-    const res = await deleteCombo(comboId);
+    await deleteCombo(comboId);
 
     this.setState(prevState => ({
       combos: prevState.combos.filter(combo =>
         combo.id !== parseInt(comboId))
     }))
-
   }
 
 
@@ -221,7 +259,7 @@ class App extends React.Component {
         <div>
           {this.state.currentUser && (
             <>
-              <Route path="/home" render={() => (
+              <Route path="/home" exact render={() => (
                 <>
 
                   <p>Hello {this.state.currentUser.name}!</p>
@@ -239,8 +277,24 @@ class App extends React.Component {
 
               <Route path="/combo" render={() => (
                 <ComboBoard
-                  handleComboDelete={this.handleComboDelete}
+                  
                   combos={this.state.combos}
+                  handleViewCombos={this.handleViewCombos}
+                  handleComboDelete={this.handleComboDelete}
+                  handleComboUpdate={this.handleComboUpdate}
+                />
+              )} />
+
+              <Route path="/allcombos" render={() => (
+                <AllCombos
+                  allcombos={this.state.allcombos}
+                />
+              )} />
+              <Route path="/combodetails" render={() => (
+                <ComboDetails
+                  combo={this.state.meal}
+                  handleComboUpdate={this.handleComboUpdate}
+                  
                 />
               )} />
 

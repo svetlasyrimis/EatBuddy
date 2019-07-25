@@ -4,23 +4,21 @@
   width: 100%;
   display: flex; 
   color: rgb(194, 25, 25);
-  font-size: 210px;
+  font-size: 180px;
   text-align: center;
   justify-content: space-around; 
   font-family: 'Lobster', cursive;
   margin-right: 180px;
   margin-top: 15px;
   padding-top: 50px; 
-  
-
 }
 
 .header header img {
   margin-top: 40px;
   margin-left: 50px;
-  height: 300px; 
+  height: 250px; 
   margin-bottom: 50px;
-  padding-top: 45px; 
+  padding-top: 55px; 
 }
 
 header {
@@ -125,7 +123,24 @@ div p{
   border-radius: 50px 50px 50px 50px; 
   padding-top: 45px; 
   padding-bottom: 10px; 
+  box-shadow: 10px 10px 5px grey;
 }
+
+.container{
+  margin-top: 15px; 
+  margin-bottom: 40px; 
+  
+}
+
+.shuffler {
+  background-color: lightblue;
+}
+
+.shuffler h2 {
+  font-family: 'Lobster', cursive;
+}
+
+
 
 .boardCard button {
   align-content: center;
@@ -137,18 +152,140 @@ div p{
   margin-top: 45px; 
   background-color: white;
 }
-.boardCard .heart {
-  height: 30px;
-  width: 30px; 
+
+.allCombos {
+  background-color: lightblue; 
   
 }
 
-.boardCard button .heart {
+.comboCard button{
+  font-family: 'Lobster', cursive;
+  font-size: 20px; 
+}
+
+.comboHeaders h4{
+  text-align: center;
+  font-size: 55px; 
+  font-family: 'Lobster', cursive;
+}
+
+/* Log In Form */
+.loginpage{
+  background-image: linear-gradient(to right, white, hsla(190, 48%, 80%, 0.687), white);
+  box-shadow: 34px 13px 36px 5px rgba(55,56,56,1);
+  margin-left: 250px; 
+  margin-top: 30px;
+  margin-right: 250px;
+  padding-top: 25px;
+  padding-bottom: 15px; 
+  border-radius: 50px 50px 50px 50px;
+}
+
+.Loginform h3, label {
+  font-family: 'Lobster', cursive;
+}
+
+.Loginform {
+  margin-top: 25px;
+}
+
+.button {
+  padding-bottom: 35px;
   
 }
 
-div .boardCard {
-  padding-top: 30px; 
-  
-  
+.Loginform label {
+  font-size: 25px;
 }
+
+.Loginform h3{
+  font-size: 35px;
+}
+
+.Loginform input {
+  margin-bottom: 15px;
+  font-family: 'Lobster', cursive;
+  font-size: 20px;
+}
+
+.loginpage .button {
+  font-family: 'Lobster', cursive;
+  font-size: 22px;
+  margin-top: 10px;
+}
+
+/* Register Form */
+.registerpage {
+  background-image: linear-gradient(to right, white, hsla(190, 48%, 80%, 0.687), white);
+  box-shadow: 34px 13px 36px 5px rgba(55,56,56,1);
+  margin-left: 250px; 
+  margin-top: 30px;
+  margin-right: 250px;
+  padding-top: 25px;
+  padding-bottom: 15px; 
+  border-radius: 50px 50px 50px 50px;
+}
+
+.Registerform h3{
+  font-size: 35px;
+}
+
+.Registerform h3, label {
+  font-family: 'Lobster', cursive;
+}
+
+.Registerform {
+  margin-top: 25px;
+}
+
+.Registerform label {
+  font-size: 25px;
+}
+
+.Registerform h3{
+  font-size: 35px;
+}
+
+.Registerform input {
+  margin-bottom: 15px;
+  font-family: 'Lobster', cursive;
+  font-size: 20px;
+}
+
+.registerpage .button {
+  font-family: 'Lobster', cursive;
+  font-size: 22px;
+  margin-top: 10px;
+}
+
+.shuffler button {
+  font-family: 'Lobster', cursive;
+  font-size: 20px;
+}
+
+#container > div
+{
+    display: inline-block;
+    border: solid 1px #000;
+     overflow: scroll;
+    height: 500px; 
+}
+
+#container
+{
+    border: solid 1px #ff0000;
+    text-align: center;
+    margin: 0px auto;
+    width: 60%;
+    display: flex;
+
+   
+}
+
+.card-text {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+/* p. {
+
+} */

@@ -10,13 +10,15 @@ export default function Login(props) {
       {
         props.currentView === 'register' && (
           <>
-            <RegisterForm
-              registerForm={props.registerFormData}
-              handleSubmit={props.handleRegisterSubmit}
-              handleChange={props.handleRegisterFormChange}
-            />
-            <div className="button">
-              <button onClick={props.toggleAuthView}>Login</button>
+            <div className="registerpage">
+              <RegisterForm
+                registerForm={props.registerFormData}
+                handleSubmit={props.handleRegisterSubmit}
+                handleChange={props.handleRegisterFormChange}
+              />
+              <div className="button">
+                <button onClick={props.toggleAuthView}>Login</button>
+              </div>
             </div>
           </>
         )
@@ -26,13 +28,15 @@ export default function Login(props) {
       {
         props.currentView === 'login' && (
           <>
-            <LoginForm
-              loginFormData={props.loginFormData}
-              handleSubmit={props.handleLoginSubmit}
-              handleChange={props.handleLoginFormChange}
-            />
-            <div className="button">
-              <button onClick={props.toggleAuthView}>Register</button>
+            <div className="loginpage">
+              <LoginForm
+                loginFormData={props.loginFormData}
+                handleSubmit={props.handleLoginSubmit}
+                handleChange={props.handleLoginFormChange}
+              />
+              <div className="button">
+                <button onClick={props.toggleAuthView}>Register</button>
+              </div>
             </div>
           </>
         )

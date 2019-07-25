@@ -1,11 +1,12 @@
 import React from 'react';
-import { fetchFood, fetchDrink } from './services/api-helper'
+import { fetchFood, fetchDrink, fetchMealId, fetchDrinkId } from './services/api-helper'
 import './App.css';
 import Header from './components/Header'
 import Login from './components/Login'
 import MakeCombo from './components/MakeCombo'
 import ComboBoard from './components/ComboBoard'
 import Nav from './components/Nav'
+import RecipeInfo from './components/RecipeInfo'
 import { createCombo, deleteCombo } from './services/combos'
 import { Route, withRouter } from 'react-router-dom'
 import {
@@ -26,6 +27,7 @@ class App extends React.Component {
     this.state = {
       currentView: 'login',
       currentUser: null,
+      currentCombo: null,
       combos: [],
       meal: {
         food: 'Food',
@@ -79,7 +81,18 @@ class App extends React.Component {
     console.log(this.state.combos)
   }
 
-
+  getComboRecipes = async (comboId) => {
+    const currentCombo = this.state.combos.find(combo => combo.id === comboId)
+    const comboFoodItem = await fetchMealId(currentCombo.foodId)
+    const comboDrinkItem = await fetchDrinkId(currentCombo.drinkId)
+    this.setState({
+      currentCombo: {
+        meal: comboFoodItem,
+        drink: comboDrinkItem
+      }
+    })
+    this.props.history.push(`/recipe/${currentCombo.id}`)
+  }
 
 
   handleLoginFormChange = (ev) => {
@@ -218,11 +231,16 @@ class App extends React.Component {
 
               <Route path="/combo" render={() => (
                 <ComboBoard
+                  getComboRecipes={this.getComboRecipes}
                   handleComboDelete={this.handleComboDelete}
                   combos={this.state.combos}
                 />
               )} />
-
+              <Route path="/recipe/:id" render={() => (
+                <RecipeInfo
+                  currentCombo={this.state.currentCombo}
+                />
+              )} />
 
             </>
           )}

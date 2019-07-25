@@ -1,7 +1,6 @@
 import React from 'react'
 import Shuffler from './Shuffler'
 import Nav from './Nav'
-import Header from './Header'
 
 function MakeCombo(props) {
   return (

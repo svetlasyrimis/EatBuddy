@@ -56,4 +56,6 @@ userRouter.get('/verify', restrict, (req, res) => {
   res.json({ user: res.locals.user });
 });
 
+
+
 module.exports = userRouter

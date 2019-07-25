@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { Comment } = require('../models');
 // const {restrict} = require('../auth')  gonna pass this as middleware when ready with logins
 
-const commentRouter = router();
+const commentRouter = Router();
 
 // commentRouter.get('/all', async (req, res) => {
 //   const comments = await Comment.findAll();

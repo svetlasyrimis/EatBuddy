@@ -1,0 +1,18 @@
+import React from 'react';
+import Shuffler from './Shuffler';
+import Button from 'react-bootstrap/Button'
+
+const ComboDetails = (props) => {
+  return (
+    <div>
+     
+      <Shuffler data={props.combo}/>
+    <button name="Comments">Comments</button>
+      <button name={props.combo.id} onClick={props.handleComboUpdate} variant="info">Info</button></div>
+  )
+}
+
+export default ComboDetails;
+
+
+{/* <img className="heart" src={"https://i.imgur.com/2UeMQie.jpg"} alt="like"/> */}

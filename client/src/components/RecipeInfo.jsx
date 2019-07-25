@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { createComment } from '../services/comments'
 import { fetchComments } from '../services/comments'
 
@@ -8,6 +9,13 @@ class RecipeInfo extends React.Component {
     this.state = {
       comment: ""
     }
+
+import Nav from './Nav';
+
+class RecipeInfo extends React.Component {
+  constructor(props) {
+    super(props)
+
   }
 
   handleSubmit = async (ev) => {
@@ -31,6 +39,7 @@ class RecipeInfo extends React.Component {
     console.log(this.state.formdata)
     return (
       <>
+
         {this.props.currentCombo && (
           <>
             <div>
@@ -44,6 +53,21 @@ class RecipeInfo extends React.Component {
               <p>{this.props.currentCombo.drink.strDrink}</p>
               <p>{this.props.currentCombo.drink.strInstructions}</p>
               <img src={this.props.currentCombo.drink.strDrinkThumb} />
+
+        <Nav
+          handleLogout={this.props.handleLogout} />
+        <div>
+          <h1>Meal Recipe Info</h1>
+          <p>{this.props.currentCombo.meal.strMeal}</p>
+          <p>{this.props.currentCombo.meal.strInstructions}</p>
+          <img src={this.props.currentCombo.meal.strMealThumb} />
+        </div>
+        <div>
+          <h1>Drink Recipe Info</h1>
+          <p>{this.props.currentCombo.drink.strDrink}</p>
+          <p>{this.props.currentCombo.drink.strInstructions}</p>
+          <img src={this.props.currentCombo.drink.strDrinkThumb} />
+
 
             </div>
 

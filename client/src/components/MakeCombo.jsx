@@ -11,7 +11,7 @@ function MakeCombo(props) {
       />
 
       <h1>{'Meal Shuffler'}</h1>
-      <h2>Shuffle and add meal combo to your combo board.</h2>
+      <h2>Shuffle and add a meal combo to your combo board.</h2>
       {props.meal &&
         <Shuffler data={props.meal} />
       }

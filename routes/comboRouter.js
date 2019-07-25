@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const { Combo } = require('../models');
-
+const { Combo,User } = require('../models');
+const { restrict } = require('../auth');
 const comboRouter = Router();
 
 comboRouter.get('/', (req, res) => {
@@ -13,13 +13,20 @@ comboRouter.get('/all', async (req, res) => {
   res.json({ combos });
 });
 
-comboRouter.post('/', async (req, res) => {
+comboRouter.post('/', restrict, async (req, res) => {
+  console.log(req.body)
+  
   const combo = await Combo.create(req.body);
-  console.log(combo.dataValues);
+  const user = await User.findByPk(res.locals.id);
+  console.log(user.id);
+  // console.log(name)
+  const answer = await combo.setUser(user);
+  console.log(answer.dataValues);
+  // console.log(combo);
   res.json({ combo });
 });
 
-comboRouter.delete('/:id', async (req, res) => {
+comboRouter.delete('/:id', restrict ,async (req, res) => {
   try {
     await Combo.destroy({
       where: {
@@ -33,15 +40,21 @@ comboRouter.delete('/:id', async (req, res) => {
   }
 
 })
+comboRouter.get('/:id', async (req, res) => {
+  const combo = await Combo.findByPk(req.params.id);
 
-comboRouter.put('id/:id', async (req, res) => {
+  res.json({ combo });
+})
+
+
+comboRouter.put('/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const data = req.body;
     await Combo.update(
       data, {
         where: {
-          id
+          id,
         },
       });
     const combo = await Combo.findByPk(id);
@@ -50,6 +63,34 @@ comboRouter.put('id/:id', async (req, res) => {
     console.log(e.message);
     res.status(500).send(e.message);
   }
+});
+
+// comboRouter.get('/user/:id', async (req, res) => {
+//   const user = await User.findByPk(req.params.id);
+//   console.log(user);
+//   const combos = await Combo.findAll({
+//     where: {
+//       user_id: user.dataValues.id
+//     }
+//   });
+//   console.log(combos)
+//   res.json({ combos });
+  
+// });
+
+comboRouter.get('/:id', async (req, res) => {
+  const id = req.params.id
+  console.log(id)
+  const user = await User.findByPk(req.params.id);
+  console.log(user);
+  const combos = await Combo.findAll({
+    where: {
+      user_id: user.dataValues.id
+    }
+  });
+  console.log(combos)
+  res.json({ combos });
+  
 });
 
 

@@ -70,11 +70,12 @@ class App extends React.Component {
         drink: drinkResp.strDrink,
         drinkImage: drinkResp.strDrinkThumb,
         drinkId: drinkResp.idDrink,
+        isLiked: false
       }
     })
     const combo = await createCombo(this.state.meal);
     this.setState(prevState => ({
-      combos: [...prevState.combos, combo]
+      combos: [combo,...prevState.combos]
     }));
     console.log(this.state.combos)
   }
@@ -133,7 +134,12 @@ class App extends React.Component {
     this.props.history.push('/home');
     // console.log(user);
     const resp = await fetchUserCombos(this.state.currentUser.id);
-    console.log(resp.data)
+    
+    const combos = resp.combos
+    this.setState({
+      combos: combos.reverse()
+    });
+
     
   }
 
@@ -189,7 +195,7 @@ class App extends React.Component {
     console.log(comboId)
     this.setState({
       meal: {
-        isLiked: true
+        isLiked: !this.state.meal.isLiked
       }
     })
     

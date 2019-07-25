@@ -1,16 +1,12 @@
 import React from 'react';
 import { fetchFood, fetchDrink, fetchMealId, fetchDrinkId } from './services/api-helper'
-import { fetchFood, fetchDrink} from './services/api-helper'
 import './App.css';
 import Header from './components/Header'
 import Login from './components/Login'
 import MakeCombo from './components/MakeCombo'
 import ComboBoard from './components/ComboBoard'
-
 import Nav from './components/Nav'
 import RecipeInfo from './components/RecipeInfo'
-import { createCombo, deleteCombo } from './services/combos'
-
 import AllCombos from './components/AllCombos'
 import { createCombo, deleteCombo, getALL, fetchUserCombos} from './services/combos'
 
@@ -21,11 +17,6 @@ import {
   loginUser,
 
 } from './services/auth';
-
-import { getALL } from './services/combos';
-
-
-
 
 import ComboDetails from './components/ComboDetails';
 import axios from 'axios';

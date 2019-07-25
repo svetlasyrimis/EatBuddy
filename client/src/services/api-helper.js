@@ -30,8 +30,6 @@ export const fetchDrinkId = async (id) => {
 
   return resp.data.drinks[0]
 }
-
-}
 //for later use - to get the recipe right away ( Front end)
 export const getFoodRecipe = async (id) => {
   const resp = await axios.get(`${foodRecipeURL}${id}`);

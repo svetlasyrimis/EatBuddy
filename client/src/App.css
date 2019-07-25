@@ -123,7 +123,7 @@ div p{
   padding-top: 45px; 
   padding-bottom: 10px; 
   box-shadow: 10px 10px 5px grey;
-  
+
 }
 
 .container{
@@ -134,11 +134,19 @@ div p{
 
 .shuffler {
   background-color: lightblue;
+
 }
 
 .shuffler h2 {
   font-family: 'Yanone Kaffeesatz', sans-serif;
+
 }
+
+.shuffler h2 {
+  font-family: 'Lobster', cursive;
+}
+
+
 
 .boardCard button {
   align-content: center;
@@ -259,4 +267,30 @@ div p{
 .shuffler button {
   font-family: 'Lobster', cursive;
   font-size: 20px;
+
 }
+
+#container > div
+{
+    display: inline-block;
+    border: solid 1px #000;
+     overflow: scroll;
+    height: 500px; 
+}
+
+#container
+{
+    border: solid 1px #ff0000;
+    text-align: center;
+    margin: 0px auto;
+    width: 60%;
+    display: flex;
+
+   
+}
+
+.card-text {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+

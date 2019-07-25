@@ -30,6 +30,7 @@ const ComboBoard = (props) => {
 
         <div key={combo.id}>
 
+
         <div className="boardCard" key={combo.id}>
 
           <Shuffler data={combo} />
@@ -38,6 +39,7 @@ const ComboBoard = (props) => {
             props.getComboRecipes(combo.id)
           }}>Get Info</button>
           <button name={combo.id} onClick={props.handleComboUpdate} variant="info">Like</button></div>
+
         </div>
       ))}
 

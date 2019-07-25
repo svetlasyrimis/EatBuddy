@@ -1,4 +1,5 @@
 import React from 'react';
+import Card from 'react-bootstrap/Card';
 
 import { createComment } from '../services/comments'
 import { fetchComments } from '../services/comments'
@@ -40,6 +41,30 @@ class RecipeInfo extends React.Component {
     return (
       <>
 
+        <div id='container'>
+          <Card style={{ width: '50%' }}>
+            <Card.Img variant="top" src={this.props.currentCombo.meal.strMealThumb} />
+            <Card.Body>
+              <Card.Title>{this.props.currentCombo.meal.strMeal}</Card.Title>
+              <Card.Text>
+                {this.props.currentCombo.meal.strInstructions}
+              </Card.Text>
+              {/* <Button variant="primary">Go somewhere</Button> */}
+            </Card.Body>
+          </Card>
+
+
+          <Card style={{ width: '50%' }}>
+            <Card.Img variant="top" src={this.props.currentCombo.drink.strDrinkThumb} />
+            <Card.Body>
+              <Card.Title>{this.props.currentCombo.drink.strDrink}</Card.Title>
+              <Card.Text>
+                {this.props.currentCombo.drink.strInstructions}
+              </Card.Text>
+              {/* <Button variant="primary">Go somewhere</Button> */}
+            </Card.Body>
+          </Card>
+
         {this.props.currentCombo && (
           <>
             <div>
@@ -61,16 +86,9 @@ class RecipeInfo extends React.Component {
           <p>{this.props.currentCombo.meal.strMeal}</p>
           <p>{this.props.currentCombo.meal.strInstructions}</p>
           <img src={this.props.currentCombo.meal.strMealThumb} />
+
         </div>
-        <div>
-          <h1>Drink Recipe Info</h1>
-          <p>{this.props.currentCombo.drink.strDrink}</p>
-          <p>{this.props.currentCombo.drink.strInstructions}</p>
-          <img src={this.props.currentCombo.drink.strDrinkThumb} />
-
-
-            </div>
-
+              
             <div>
               <form onSubmit={this.handleSubmit}>
                 <input
@@ -84,8 +102,16 @@ class RecipeInfo extends React.Component {
             </div>
           </>
         )}
+      
       </>
     )
   }
 }
+          
+          
 export default RecipeInfo;
+
+
+           
+
+       

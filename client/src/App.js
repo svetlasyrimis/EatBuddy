@@ -10,6 +10,9 @@ import RecipeInfo from './components/RecipeInfo'
 import AllCombos from './components/AllCombos'
 import { createCombo, deleteCombo, getALL, fetchUserCombos } from './services/combos'
 
+import Footer from './components/Footer'
+
+
 import { Route, withRouter } from 'react-router-dom'
 import {
   createUser,
@@ -328,6 +331,7 @@ class App extends React.Component {
           )}
 
         </div>
+        <Footer />
 
       </div>
     )

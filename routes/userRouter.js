@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { User,Combo } = require('../models');
 const bcrypt = require('bcrypt');
 // const { Op } = require('sequelize');
-const { genToken,restrict } = require('../auth');
+const { genToken, restrict } = require('../auth');
 
 const userRouter = Router();
 const SALT = 2;
@@ -18,10 +18,10 @@ userRouter.post('/', async (req, res) => {
   const user = await User.create({
     name: name,
     password_digest: pwDigest,
-    email:email
+    email: email
   });
 
-  
+
   const { password_digest, ...userData } = user.dataValues;
   const token = genToken(userData)
   console.log(user.dataValues);
@@ -29,7 +29,7 @@ userRouter.post('/', async (req, res) => {
   console.log(user.dataValues);
 });
 
-userRouter.post('/login', async  (req, res) => {
+userRouter.post('/login', async (req, res) => {
   try {
     const { name, password } = req.body;
     const user = await User.findOne({ where: { name } });
@@ -50,7 +50,7 @@ userRouter.post('/login', async  (req, res) => {
 });
 
 userRouter.get('/verify', restrict, (req, res) => {
-  res.json({ user: res.locals.user });
+  res.json({ user: res.locals });
 });
 
 userRouter.get('/:id/combos', async (req, res) => {

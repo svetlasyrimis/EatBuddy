@@ -29,6 +29,8 @@ const ComboBoard = (props) => {
       {props.combos && props.combos.map(combo => (
 
         <div key={combo.id}>
+
+
         <div className="boardCard" key={combo.id}>
 
           <Shuffler data={combo} />
@@ -36,14 +38,19 @@ const ComboBoard = (props) => {
 
             props.getComboRecipes(combo.id)
           }}>Get Info</button>
+
           <button name={combo.id} onClick={props.handleComboUpdate} variant="info">Like<span className="heart">&hearts;</span>
         </button></div>
          
           
 
 
+          <button name={combo.id} onClick={props.handleComboUpdate} variant="info">Like</button></div>
+
+
         </div>
       ))}
+
     </div>
   )
 }

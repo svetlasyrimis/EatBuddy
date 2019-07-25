@@ -8,7 +8,10 @@ import ComboBoard from './components/ComboBoard'
 import Nav from './components/Nav'
 import RecipeInfo from './components/RecipeInfo'
 import AllCombos from './components/AllCombos'
-import { createCombo, deleteCombo, getALL, fetchUserCombos} from './services/combos'
+import { createCombo, deleteCombo, getALL, fetchUserCombos } from './services/combos'
+
+import Footer from './components/Footer'
+
 
 import { Route, withRouter } from 'react-router-dom'
 import {
@@ -36,10 +39,10 @@ class App extends React.Component {
       allcombos: [],
       meal: {
         food: 'Food',
-        foodImage: 'https://cdn0.iconfinder.com/data/icons/handdrawn-ui-elements/512/Question_Mark-512.png',
-        foodId:'',
+        foodImage: 'https://i.imgur.com/A8GTchf.png',
+        foodId: '',
         drink: 'Drink',
-        drinkImage: 'https://cdn0.iconfinder.com/data/icons/handdrawn-ui-elements/512/Question_Mark-512.png',
+        drinkImage: 'https://i.imgur.com/A8GTchf.png',
         drinkId: '',
         isLiked: undefined
       },
@@ -64,7 +67,16 @@ class App extends React.Component {
     // console.log(drinkResp)
     const foodResp = await fetchFood();
     // console.log(foodResp);
+    const meal = {
+      food: foodResp.strMeal,
+      foodImage: foodResp.strMealThumb,
+      foodId: foodResp.idMeal,
+      drink: drinkResp.strDrink,
+      drinkImage: drinkResp.strDrinkThumb,
+      drinkId: drinkResp.idDrink,
+    }
     this.setState({
+
       meal: {
         food: foodResp.strMeal,
         foodImage: foodResp.strMealThumb,
@@ -74,43 +86,47 @@ class App extends React.Component {
         drinkId: drinkResp.idDrink,
         isLiked: false
       }
+
     })
-    const combo = await createCombo(this.state.meal);
+    const combo = await createCombo(meal);
     this.setState(prevState => ({
       combos: [combo,...prevState.combos]
     }));
     console.log(this.state.combos)
   }
 
-  
+
   getComboRecipes = async (comboId) => {
     const currentCombo = this.state.combos.find(combo => combo.id === comboId)
     const comboFoodItem = await fetchMealId(currentCombo.foodId)
     const comboDrinkItem = await fetchDrinkId(currentCombo.drinkId)
     this.setState({
       currentCombo: {
+        id: comboId,
         meal: comboFoodItem,
-        drink: comboDrinkItem
+        drink: comboDrinkItem,
+        comments: currentCombo.comments
       }
     })
     this.props.history.push(`/recipe/${currentCombo.id}`)
   }
 
   componentDidMount = async () => {
-    
+
     const user = await verifyToken();
-    
+
     if (user) {
-      
-   
+
+
       this.setState({
         currentUser: user
-      
+
       })
+      this.props.history.push(`/home`)
     }
     console.log(this.state.currentUser)
   }
-  
+
 
   handleLoginFormChange = (ev) => {
     const { name, value } = ev.target;
@@ -136,6 +152,7 @@ class App extends React.Component {
     this.props.history.push('/home');
     // console.log(user);
     const resp = await fetchUserCombos(this.state.currentUser.id);
+
     
     const combos = resp.combos
     this.setState({
@@ -143,6 +160,9 @@ class App extends React.Component {
     });
 
     
+
+    console.log(resp.data)
+
   }
 
   handleLogout = (e) => {
@@ -174,7 +194,7 @@ class App extends React.Component {
       }
     }));
   }
-  
+
   handleRegisterSubmit = async (ev) => {
     ev.preventDefault();
     const user = await createUser(this.state.registerFormData);
@@ -198,12 +218,23 @@ class App extends React.Component {
     console.log(comboId)
     this.setState({
       meal: {
+
         isLiked: !this.state.meal.isLiked
       },
       bgColor: 'lightblue'
     });
     const resp = await axios.put(`http://localhost:3005/combos/${comboId}`,this.state.meal);
     
+
+        isLiked: true
+      }
+    })
+
+    const resp = await axios.put(`http://localhost:3005/combos/${comboId}`, this.state.meal);
+    debugger;
+    console.log(resp.data.combo)
+
+
   }
 
   handleViewCombos = async () => {
@@ -215,6 +246,17 @@ class App extends React.Component {
     console.log(this.state.allcombos)
   }
 
+  addNewComment = (comment) => {
+    const singleCombo = this.state.combos.find(combo => combo.id === this.state.currentCombo.id)
+
+    this.setState(prevState => ({
+      currentCombo: {
+        ...prevState.currentCombo,
+        comments: [...prevState.currentCombo.comments, comment]
+      },
+      combos: [...prevState.combos.filter(combo => combo.id !== prevState.currentCombo.id), { ...singleCombo, comments: [...singleCombo.comments, comment] }]
+    }))
+  }
 
   handleComboDelete = async (e) => {
     e.preventDefault();
@@ -282,7 +324,9 @@ class App extends React.Component {
                   getComboRecipes={this.getComboRecipes}
                   handleComboDelete={this.handleComboDelete}
                   isToggleOn={this.state.isToggleOn}
-                  
+
+                  handleLogout={this.handleLogout}
+
 
                   combos={this.state.combos}
                   handleViewCombos={this.handleViewCombos}
@@ -294,6 +338,7 @@ class App extends React.Component {
 
               <Route path="/allcombos" render={() => (
                 <AllCombos
+                  handleLogout={this.handleLogout}
                   allcombos={this.state.allcombos}
                 />
               )} />
@@ -301,11 +346,16 @@ class App extends React.Component {
                 <ComboDetails
                   combo={this.state.meal}
                   handleComboUpdate={this.handleComboUpdate}
-                  
+
                 />
               )} />
               <Route path="/recipe/:id" render={() => (
                 <RecipeInfo
+
+                  addNewComment={this.addNewComment}
+
+                  handleLogout={this.handleLogout}
+
                   currentCombo={this.state.currentCombo}
                 />
               )} />
@@ -314,6 +364,7 @@ class App extends React.Component {
           )}
 
         </div>
+        <Footer />
 
       </div>
     )

@@ -5,12 +5,13 @@ import Header from './components/Header'
 import Login from './components/Login'
 import MakeCombo from './components/MakeCombo'
 import ComboBoard from './components/ComboBoard'
-
 import Nav from './components/Nav'
 import RecipeInfo from './components/RecipeInfo'
 import AllCombos from './components/AllCombos'
 import { createCombo, deleteCombo, getALL, fetchUserCombos } from './services/combos'
+
 import Footer from './components/Footer'
+
 
 import { Route, withRouter } from 'react-router-dom'
 import {
@@ -19,8 +20,6 @@ import {
   loginUser,
 
 } from './services/auth';
-
-
 
 
 import ComboDetails from './components/ComboDetails';
@@ -40,10 +39,10 @@ class App extends React.Component {
       allcombos: [],
       meal: {
         food: 'Food',
-        foodImage: 'https://cdn0.iconfinder.com/data/icons/handdrawn-ui-elements/512/Question_Mark-512.png',
+        foodImage: 'https://i.imgur.com/A8GTchf.png',
         foodId: '',
         drink: 'Drink',
-        drinkImage: 'https://cdn0.iconfinder.com/data/icons/handdrawn-ui-elements/512/Question_Mark-512.png',
+        drinkImage: 'https://i.imgur.com/A8GTchf.png',
         drinkId: '',
         isLiked: undefined
       },
@@ -66,17 +65,18 @@ class App extends React.Component {
     // console.log(drinkResp)
     const foodResp = await fetchFood();
     // console.log(foodResp);
+    const meal = {
+      food: foodResp.strMeal,
+      foodImage: foodResp.strMealThumb,
+      foodId: foodResp.idMeal,
+      drink: drinkResp.strDrink,
+      drinkImage: drinkResp.strDrinkThumb,
+      drinkId: drinkResp.idDrink,
+    }
     this.setState({
-      meal: {
-        food: foodResp.strMeal,
-        foodImage: foodResp.strMealThumb,
-        foodId: foodResp.idMeal,
-        drink: drinkResp.strDrink,
-        drinkImage: drinkResp.strDrinkThumb,
-        drinkId: drinkResp.idDrink,
-      }
+      meal: meal
     })
-    const combo = await createCombo(this.state.meal);
+    const combo = await createCombo(meal);
     this.setState(prevState => ({
       combos: [...prevState.combos, combo]
     }));
@@ -90,8 +90,10 @@ class App extends React.Component {
     const comboDrinkItem = await fetchDrinkId(currentCombo.drinkId)
     this.setState({
       currentCombo: {
+        id: comboId,
         meal: comboFoodItem,
-        drink: comboDrinkItem
+        drink: comboDrinkItem,
+        comments: currentCombo.comments
       }
     })
     this.props.history.push(`/recipe/${currentCombo.id}`)
@@ -108,6 +110,7 @@ class App extends React.Component {
         currentUser: user
 
       })
+      this.props.history.push(`/home`)
     }
     console.log(this.state.currentUser)
   }
@@ -212,6 +215,17 @@ class App extends React.Component {
     console.log(this.state.allcombos)
   }
 
+  addNewComment = (comment) => {
+    const singleCombo = this.state.combos.find(combo => combo.id === this.state.currentCombo.id)
+
+    this.setState(prevState => ({
+      currentCombo: {
+        ...prevState.currentCombo,
+        comments: [...prevState.currentCombo.comments, comment]
+      },
+      combos: [...prevState.combos.filter(combo => combo.id !== prevState.currentCombo.id), { ...singleCombo, comments: [...singleCombo.comments, comment] }]
+    }))
+  }
 
   handleComboDelete = async (e) => {
     e.preventDefault();
@@ -278,6 +292,7 @@ class App extends React.Component {
 
                   getComboRecipes={this.getComboRecipes}
                   handleComboDelete={this.handleComboDelete}
+                  handleLogout={this.handleLogout}
 
 
 
@@ -290,6 +305,7 @@ class App extends React.Component {
 
               <Route path="/allcombos" render={() => (
                 <AllCombos
+                  handleLogout={this.handleLogout}
                   allcombos={this.state.allcombos}
                 />
               )} />
@@ -302,6 +318,11 @@ class App extends React.Component {
               )} />
               <Route path="/recipe/:id" render={() => (
                 <RecipeInfo
+
+                  addNewComment={this.addNewComment}
+
+                  handleLogout={this.handleLogout}
+
                   currentCombo={this.state.currentCombo}
                 />
               )} />

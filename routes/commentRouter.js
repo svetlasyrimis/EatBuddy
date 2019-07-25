@@ -1,8 +1,16 @@
 const { Router } = require('express');
-const { Comment } = require('../models');
+const { Comment, Combo } = require('../models');
 const commentRouter = Router();
 
 // const {restrict} = require('../auth')  gonna pass this as middleware when ready with logins
+
+
+
+commentRouter.get('/', async (req, res) => {
+  const comments = await Comment.findAll();
+  res.json({ comments });
+});
+
 
 
 // commentRouter.get('/all', async (req, res) => {
@@ -11,8 +19,10 @@ const commentRouter = Router();
 //   res.json({ comments });
 // });
 
+
 commentRouter.post('/', async (req, res) => {
-  const comment = await Comment.create(req.body);
+  const combo = await Combo.findByPk(req.body.combo)
+  const comment = await combo.createComment({ comment: req.body.comment });
   console.log(comment);
   res.json({ comment })
 });

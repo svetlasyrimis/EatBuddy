@@ -95,7 +95,6 @@ div p{
 
 .reg{
   display: flex; 
-  flex-direction: column;
   width: 200px; 
   margin: 0 auto;
 
@@ -124,6 +123,7 @@ div p{
   padding-top: 45px; 
   padding-bottom: 10px; 
   box-shadow: 10px 10px 5px grey;
+
 }
 
 .container{
@@ -134,6 +134,12 @@ div p{
 
 .shuffler {
   background-color: lightblue;
+
+}
+
+.shuffler h2 {
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+
 }
 
 .shuffler h2 {
@@ -261,6 +267,7 @@ div p{
 .shuffler button {
   font-family: 'Lobster', cursive;
   font-size: 20px;
+
 }
 
 #container > div
@@ -286,6 +293,4 @@ div p{
   font-family: 'Yanone Kaffeesatz', sans-serif;
 }
 
-/* p. {
 
-} */

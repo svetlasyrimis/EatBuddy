@@ -25,6 +25,7 @@ import {
 
 import ComboDetails from './components/ComboDetails';
 import axios from 'axios';
+import { updateComment } from './services/comments';
 
 
 
@@ -59,6 +60,8 @@ class App extends React.Component {
         password: '',
         email: ''
       },
+      isToggleOn: true,
+      bgColor:''
     }
   }
 
@@ -77,11 +80,21 @@ class App extends React.Component {
       drinkId: drinkResp.idDrink,
     }
     this.setState({
-      meal: meal
+
+      meal: {
+        food: foodResp.strMeal,
+        foodImage: foodResp.strMealThumb,
+        foodId: foodResp.idMeal,
+        drink: drinkResp.strDrink,
+        drinkImage: drinkResp.strDrinkThumb,
+        drinkId: drinkResp.idDrink,
+        isLiked: false
+      }
+
     })
     const combo = await createCombo(meal);
     this.setState(prevState => ({
-      combos: [...prevState.combos, combo]
+      combos: [combo,...prevState.combos]
     }));
     console.log(this.state.combos)
   }
@@ -202,6 +215,14 @@ class App extends React.Component {
   comboLike = async () => {
     this.setState({
       meal: {
+
+        isLiked: !this.state.meal.isLiked
+      },
+      bgColor: 'lightblue'
+    });
+    const resp = await axios.put(`http://localhost:3005/combos/${comboId}`,this.state.meal);
+    
+
         isLiked: true
       }
     })
@@ -224,6 +245,7 @@ class App extends React.Component {
     }));
     console.log(this.state.favorites)
 
+
   }
 
   handleViewCombos = async () => {
@@ -244,6 +266,20 @@ class App extends React.Component {
         comments: [...prevState.currentCombo.comments, comment]
       },
       combos: [...prevState.combos.filter(combo => combo.id !== prevState.currentCombo.id), { ...singleCombo, comments: [...singleCombo.comments, comment] }]
+    }))
+  }
+
+  putComment = async (id, commentInfo) => {
+    const newComment = await updateComment(id, commentInfo)
+    debugger;
+    const singleCombo = this.state.combos.find(combo => combo.id === this.state.currentCombo.id)
+    this.setState(prevState => ({
+      currentCombo: {
+        ...prevState.currentCombo,
+        comments: prevState.currentCombo.comments.map(comment => comment.id === newComment.id ? newComment : comment)
+      },
+      combos: [...prevState.combos.filter(combo => combo.id !== prevState.currentCombo.id),
+      { ...singleCombo, comments: singleCombo.comments.map(comment => comment.id === newComment.id ? newComment : comment) }]
     }))
   }
 
@@ -312,14 +348,16 @@ class App extends React.Component {
 
                   getComboRecipes={this.getComboRecipes}
                   handleComboDelete={this.handleComboDelete}
-                  handleLogout={this.handleLogout}
+                  isToggleOn={this.state.isToggleOn}
 
+                  handleLogout={this.handleLogout}
 
 
                   combos={this.state.combos}
                   handleViewCombos={this.handleViewCombos}
                   handleComboDelete={this.handleComboDelete}
                   handleComboUpdate={this.handleComboUpdate}
+                  bgColor={this.state.bgColor}
                 />
               )} />
 
@@ -349,9 +387,12 @@ class App extends React.Component {
 
                   addNewComment={this.addNewComment}
 
+                  putComment={this.putComment}
+
                   handleLogout={this.handleLogout}
 
                   currentCombo={this.state.currentCombo}
+
                 />
               )} />
 

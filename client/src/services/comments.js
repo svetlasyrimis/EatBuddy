@@ -10,9 +10,9 @@ export const fetchComments = async () => {
   return resp.data.comment;
 }
 
-export const updateComment = async (id, data) => {
-  const resp = await api.put(`/comments/${id}`, data);
-  return resp.data.product;
+export const updateComment = async (id, comment) => {
+  const resp = await api.put(`/comments/${id}`, { comment });
+  return resp.data.comment;
 };
 
 // export const deleteComment = async()

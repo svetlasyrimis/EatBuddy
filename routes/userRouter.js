@@ -24,8 +24,7 @@ userRouter.post('/', async (req, res) => {
   const token = genToken(userData)
   console.log(user.dataValues);
   res.json({ user: userData, token });
-  
-
+  console.log(user.dataValues);
 });
 
 userRouter.post('/login', async (req, res) => {
@@ -52,7 +51,6 @@ userRouter.get('/verify', restrict, (req, res) => {
   res.json({ user: res.locals });
 });
 
-
 userRouter.get('/:id/combos', async (req, res) => {
   const id = req.params.id;
   console.log(id)
@@ -64,6 +62,5 @@ userRouter.get('/:id/combos', async (req, res) => {
   console.log(combos);
   res.json({combos})
 })
-
 
 module.exports = userRouter

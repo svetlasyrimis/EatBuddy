@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button'
 
 
 const ComboBoard = (props) => {
+  console.log(props)
   return (
     <div className="comboCard">
       <Nav
@@ -27,18 +28,16 @@ const ComboBoard = (props) => {
           <Redirect to="/home" />
         </>}
       {props.combos && props.combos.map(combo => (
+        < div key={combo.id} >
 
-        <div key={combo.id}>
+          <div className="boardCard" key={combo.id}>
 
+            <Shuffler data={combo} />
+            <button name={combo.id} onClick={props.handleComboDelete}>Delete</button> <button name={combo.id} onClick={() => {
 
-        <div className="boardCard" key={combo.id}>
-
-          <Shuffler data={combo} />
-          <button name={combo.id} onClick={props.handleComboDelete}>Delete</button> <button name={combo.id} onClick={() => {
-
-            props.getComboRecipes(combo.id)
-          }}>Get Info</button>
-          <button name={combo.id} onClick={props.handleComboUpdate} variant="info">Like</button></div>
+              props.getComboRecipes(combo.id)
+            }}>Get Info</button>
+            <button name={combo.id} onClick={props.handleComboUpdate} variant="info" >Like<span className="heart">&hearts;</span></button></div>
 
         </div>
       ))}

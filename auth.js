@@ -8,8 +8,6 @@ const genToken = (payload) => {
 
 const restrict = (req, res, next) => {
   try {
-
-    // const token = localStorage.getItem('authToken')
     const token = req.headers.authorization.split(" ")[1];
     console.log(token);
     const user = jwt.verify(token, SECRET);

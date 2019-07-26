@@ -6,7 +6,7 @@ class Footer extends React.Component {
       <>
 
         <small>&copy; Pandas 2019</small>
-        <p><span class="bold">Email:</span> fullstackpandas@me.com</p>
+        <p><span className="bold">Email:</span> fullstackpandas@me.com</p>
 
         <h6> a GA company</h6 >
       </>

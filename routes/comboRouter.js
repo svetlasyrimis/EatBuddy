@@ -56,7 +56,7 @@ comboRouter.put('/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const data = req.body;
-    console.log(data)
+    console.log("data" + data)
     await Combo.update(
       data, {
         where: {
@@ -64,7 +64,7 @@ comboRouter.put('/:id', async (req, res) => {
         },
       });
     const combo = await Combo.findByPk(id);
-    console.log(combo)
+    // console.log(combo)
     res.json(combo);
   } catch (e) {
     console.log(e.message);
@@ -72,18 +72,14 @@ comboRouter.put('/:id', async (req, res) => {
   }
 });
 
-// comboRouter.get('/user/:id', async (req, res) => {
-//   const user = await User.findByPk(req.params.id);
-//   console.log(user);
-//   const combos = await Combo.findAll({
-//     where: {
-//       user_id: user.dataValues.id
-//     }
-//   });
-//   console.log(combos)
-//   res.json({ combos });
-
-// });
+comboRouter.get('/favorites', async (req, res) => {
+  const favorites = await Combo.findAll({
+    where: {
+      isLiked: true
+    }
+  })
+  res.jsonp({favorites})
+})
 
 comboRouter.get('/:id', async (req, res) => {
   const id = req.params.id

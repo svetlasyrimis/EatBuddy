@@ -46,7 +46,7 @@ div p{
   display: flex;
   align-items: center;
   top: 0;
-  
+  z-index: 10;
 }
 
 .heart {
@@ -101,7 +101,7 @@ div p{
   display: flex; 
   width: 200px; 
   margin: 0 auto;
-
+  flex-direction: column;
 }
 
 .Registerform{
@@ -150,6 +150,9 @@ div p{
   font-family: 'Lobster', cursive;
 }
 
+.boardCard {
+  text-align: center;
+}
 
 
 .boardCard button {
@@ -159,7 +162,7 @@ div p{
   font-size: 20px; 
   width: 10%;  
   justify-content: space-around;
-  margin-top: 45px; 
+  margin-bottom: 45px; 
   background-color: white;
 }
 
@@ -169,6 +172,9 @@ div p{
 }
 
 
+.comboCard {
+  text-align: center;
+}
 
 
 .comboCard button{
@@ -274,9 +280,26 @@ div p{
 
 .shuffler button {
   font-family: 'Lobster', cursive;
-  font-size: 20px;
-
+  font-size: 25px;
+  background-color: rgb(194, 25, 25);
+  color: white;
+  padding: 15px;
+  margin-bottom: 25px; 
+  border-radius: 50px 50px 50px 50px;
+  box-shadow: 10px 10px 5px grey;
 }
+
+#nav-bar button{
+  color: black;
+  padding: 9px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 10px;
+  background-color: white;
+  box-shadow: 0px 0px 0px;
+}
+
+
 
 #container > div
 {
@@ -297,8 +320,75 @@ div p{
    
 }
 
-.card-text {
-  font-family: 'Yanone Kaffeesatz', sans-serif;
+.comboCard button[name=all]{
+  margin-top: 20px;
+  font-size: 35px;
 }
 
 
+.card-text {
+  font-family: 'Yanon-e Kaffeesatz', sans-serif;
+}
+
+.footer-section{
+  text-align: center;
+  margin-top: 30px;
+}
+
+
+@media only screen 
+  and (max-width: 480px) {
+    .header header h1{
+      font-size: 75px;
+      text-align: left;
+      margin: 0;
+      padding: 0 0 20px 0;
+  }
+  .header header img{
+    margin: 0;
+    padding: 0;
+    /* height: 30vh;
+    width: 30vw; */
+    /* padding-top:100px; */
+  }
+
+  header {
+    display: block;
+    padding-top: 95px;
+  }
+  #nav-bar a, #nav-bar button {
+    font-size: 18px;
+  }
+  #nav-bar button {
+    margin-bottom: 10px;
+  }
+  #make-combo-row p {
+    font-size: 16px;
+  }
+  .boardCard button {
+    width: 30%;  
+  }
+
+  .comboCard button[name=all]{
+    background-color: white;
+    font-size: 27px;
+    margin-top: 10px;
+  }
+
+  .loginpage{
+    width: 80%;
+   margin-bottom: 20px;
+  }
+
+  .Loginform {
+    text-align: center;
+  }
+
+  .footer-section{
+    margin-top: 20px;
+  }
+
+
+  
+
+  

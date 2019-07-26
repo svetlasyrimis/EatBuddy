@@ -10,7 +10,7 @@ const Shuffler = (props) => {
   return (
     <>
       <Container >
-        <Row>
+        <Row id="make-combo-row">
           <Col xs={{ span: 3, offset: 3 }}>
             <CrossfadeImage src={foodImage} style={{ maxWidth: "100%", borderRadius: "20%" }}
               timingFunction={"ease-in-out"}

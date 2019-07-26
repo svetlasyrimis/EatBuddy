@@ -61,7 +61,7 @@ class App extends React.Component {
         email: ''
       },
       isToggleOn: true,
-      bgColor:''
+      bgColor: ''
     }
   }
 
@@ -94,7 +94,7 @@ class App extends React.Component {
     })
     const combo = await createCombo(meal);
     this.setState(prevState => ({
-      combos: [combo,...prevState.combos]
+      combos: [combo, ...prevState.combos]
     }));
     console.log(this.state.combos)
   }
@@ -157,9 +157,9 @@ class App extends React.Component {
     // console.log(user);
     console.log(user)
     const resp = await fetchUserCombos(this.state.currentUser.id);
-    debugger;
+    
     // console.log(combos)
-    const combos = resp
+    const combos = resp.combos
     this.setState({
       combos: combos.reverse()
     });
@@ -215,14 +215,6 @@ class App extends React.Component {
   comboLike = async () => {
     this.setState({
       meal: {
-
-        isLiked: !this.state.meal.isLiked
-      },
-      bgColor: 'lightblue'
-    });
-    const resp = await axios.put(`http://localhost:3005/combos/${comboId}`,this.state.meal);
-    
-
         isLiked: true
       }
     })
@@ -374,7 +366,7 @@ class App extends React.Component {
 
                 />
               )} />
-               <Route path="/favorites" render={() => (
+              <Route path="/favorites" render={() => (
                 <Faves
                   favorites={this.state.favorites}
                   handleLogout={this.handleLogout}
@@ -407,4 +399,5 @@ class App extends React.Component {
   }
 }
 
-export default withRouter(App);
+
+export default withRouter(App)

@@ -58,6 +58,7 @@ class RecipeInfo extends React.Component {
         </div>
 
         <div>
+
           <form onSubmit={this.handleSubmit}>
             <input
 
@@ -68,6 +69,8 @@ class RecipeInfo extends React.Component {
             />
             <button>Add Comment</button>
           </form>
+
+
           {this.props.currentCombo.comments.map(comment => (
             <>
               {
@@ -96,29 +99,19 @@ class RecipeInfo extends React.Component {
                         editComment: comment.comment
                       })
                     }}> Edit </button>
-                  </>
-              }
+                  </>}
             </>
-
-              onChange={this.handleChange}
-              type="text" />
-            <button>Add Comment</button>
-          </form>
-          {this.props.currentCombo.comments.map(comment => (
-            <p>{comment.comment}</p>
-
           ))}
         </div>
       </>
     )
   }
-
 }
-
-
-export default RecipeInfo;
-
-
-
-
-
+        
+        
+ export default RecipeInfo;
+        
+        
+        
+        
+        

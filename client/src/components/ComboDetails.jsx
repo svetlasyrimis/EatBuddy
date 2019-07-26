@@ -15,4 +15,3 @@ const ComboDetails = (props) => {
 export default ComboDetails;
 
 
-{/* <img className="heart" src={"https://i.imgur.com/2UeMQie.jpg"} alt="like"/> */}

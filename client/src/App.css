@@ -336,8 +336,13 @@ div p{
 .footer-section{
   text-align: center;
   margin-top: 30px;
+  font-size: 26px;
+  
 }
-
+.bold {
+  font-size: 26px;
+  font-weight: bold;
+}
 
 @media only screen 
   and (max-width: 480px) {
@@ -389,9 +394,10 @@ div p{
 
   .footer-section{
     margin-top: 20px;
+    
   }
 
-
+  }
   
 
   

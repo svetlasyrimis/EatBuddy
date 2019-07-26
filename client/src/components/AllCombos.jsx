@@ -17,7 +17,7 @@ const AllCombos = (props) => {
           <div className="boardCard" key={combo.id}>
             <Shuffler data={combo} />
           </div>
-        ))}
+        ))}   
       </div>
 
 

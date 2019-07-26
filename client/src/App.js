@@ -9,6 +9,7 @@ import Nav from './components/Nav'
 import RecipeInfo from './components/RecipeInfo'
 import AllCombos from './components/AllCombos'
 import { createCombo, deleteCombo, getALL, fetchUserCombos } from './services/combos'
+import Faves from './components/Faves'
 
 import Footer from './components/Footer'
 
@@ -27,6 +28,7 @@ import axios from 'axios';
 
 
 
+
 class App extends React.Component {
 
   constructor() {
@@ -37,6 +39,7 @@ class App extends React.Component {
       currentCombo: null,
       combos: [],
       allcombos: [],
+      favorites: [],
       meal: {
         food: 'Food',
         foodImage: 'https://i.imgur.com/A8GTchf.png',
@@ -44,7 +47,7 @@ class App extends React.Component {
         drink: 'Drink',
         drinkImage: 'https://i.imgur.com/A8GTchf.png',
         drinkId: '',
-        isLiked: undefined
+        isLiked: false
       },
 
       loginFormData: {
@@ -139,8 +142,14 @@ class App extends React.Component {
     })
     this.props.history.push('/home');
     // console.log(user);
+    console.log(user)
     const resp = await fetchUserCombos(this.state.currentUser.id);
-    console.log(resp.data)
+    debugger;
+    // console.log(combos)
+    const combos = resp
+    this.setState({
+      combos: combos.reverse()
+    });
 
   }
 
@@ -190,19 +199,30 @@ class App extends React.Component {
     this.props.history.push('/home');
   }
 
-  handleComboUpdate = async (e) => {
-    e.preventDefault();
-    const comboId = e.target.name
-    console.log(comboId)
+  comboLike = async () => {
     this.setState({
       meal: {
         isLiked: true
       }
     })
+  }
+
+  handleComboUpdate = async (e) => {
+    e.preventDefault();
+    const comboId = e.target.name
+
+    await this.comboLike()
+
+    console.log("combo id: " + comboId)
+
+    console.log(this.state.meal)
 
     const resp = await axios.put(`http://localhost:3005/combos/${comboId}`, this.state.meal);
-    debugger;
-    console.log(resp.data.combo)
+    const favorite = resp.data;
+    this.setState(prevState => ({
+      favorites: [favorite, ...prevState.favorites]
+    }));
+    console.log(this.state.favorites)
 
   }
 
@@ -316,6 +336,14 @@ class App extends React.Component {
 
                 />
               )} />
+               <Route path="/favorites" render={() => (
+                <Faves
+                  favorites={this.state.favorites}
+                  handleLogout={this.handleLogout}
+
+                />
+              )} />
+
               <Route path="/recipe/:id" render={() => (
                 <RecipeInfo
 

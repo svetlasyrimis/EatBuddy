@@ -46,7 +46,7 @@ div p{
   display: flex;
   align-items: center;
   top: 0;
-  
+  z-index: 10;
 }
 
 #nav-bar a{
@@ -97,6 +97,7 @@ div p{
   display: flex; 
   width: 200px; 
   margin: 0 auto;
+  flex-direction: column;
 
 }
 
@@ -112,7 +113,10 @@ div p{
 }
 
 /* Combo Board */
-
+.heart {
+  font-size:1.5em;
+  color:red;
+}
 .comboCard {
   background-color: lightblue; 
 }

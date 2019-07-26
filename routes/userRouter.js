@@ -1,7 +1,6 @@
 const { Router } = require('express');
-const { User } = require('../models');
+const { User,Combo } = require('../models');
 const bcrypt = require('bcrypt');
-// const { Op } = require('sequelize');
 const { genToken, restrict } = require('../auth');
 
 const userRouter = Router();
@@ -10,7 +9,6 @@ const SALT = 2;
 
 userRouter.post('/', async (req, res) => {
   const { name, email, password } = req.body;
-  // const token = genToken({ name, email, password })
   const pwDigest = await bcrypt.hash(password, SALT);
 
 
@@ -26,9 +24,7 @@ userRouter.post('/', async (req, res) => {
   const token = genToken(userData)
   console.log(user.dataValues);
   res.json({ user: userData, token });
-  // console.log(user);
-  console.log(user.dataValues);
-  // res.json({userData})
+  
 
 });
 
@@ -56,6 +52,18 @@ userRouter.get('/verify', restrict, (req, res) => {
   res.json({ user: res.locals });
 });
 
+
+userRouter.get('/:id/combos', async (req, res) => {
+  const id = req.params.id;
+  console.log(id)
+  const combos = await Combo.findAll({
+    where: {
+      userId: id
+    }
+  })
+  console.log(combos);
+  res.json({combos})
+})
 
 
 module.exports = userRouter

@@ -40,11 +40,7 @@ const Comment = sequelize.define('comment', {
   
 });
 
-// User.belongsToMany(Combo, { as: 'Favorite', through: 'favorites', foreignKey: 'userId' })
-// Combo.belongsToMany(User, { as: 'Favorite', through: 'favorites', foreignKey: 'comboId' })
 
-// User.belongsToMany(Combo, { as: 'Comment', through: 'comments', foreignKey: 'userId' })
-// Combo.belongsToMany(User, { as: 'Comment', through: 'comments', foreignKey: 'comboId' })
 User.hasMany(Combo);
 Combo.belongsTo(User);
 Combo.hasMany(Comment, { onDelete: 'cascade' });

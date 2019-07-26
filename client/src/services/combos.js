@@ -23,10 +23,15 @@ export const fetchUserCombos = async (id) => {
   const resp = await api.get(`/users/${id}/combos`);
   return resp.data.combos;
 };
-// export const getComboForUpdate = async()  => {
-//   const resp = await api.get(`/combos/${id}`);
-//   return resp.data
-// }
+export const getOneCombo = async(id)  => {
+  const resp = await api.get(`/combos/${id}`);
+  return resp.data
+}
+
+export const fetchFavorites = async () => {
+  const resp = await api.get(`/combos/favorites`); 
+  return resp.data
+}
 
 
 

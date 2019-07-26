@@ -8,6 +8,8 @@ import { Link, withRouter, Redirect } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 
 
+
+
 const ComboBoard = (props) => {
   console.log(props)
   return (
@@ -42,7 +44,11 @@ const ComboBoard = (props) => {
             }}>Get Info</button>
 
             <button name={combo.id}
-              onClick={props.handleComboUpdate}
+              onClick={(e) => {
+                e.preventDefault();
+                props.handleComboUpdate(combo.id)
+
+              }}
               variant="info" >Like<span className="heart">&hearts;</span></button>
           </div>
 

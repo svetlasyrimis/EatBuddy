@@ -25,7 +25,7 @@ import {
 
 import ComboDetails from './components/ComboDetails';
 import axios from 'axios';
-import { updateComment } from './services/comments';
+import { updateComment,deleteComment } from './services/comments';
 
 
 
@@ -212,24 +212,14 @@ class App extends React.Component {
     this.props.history.push('/home');
   }
 
-  comboLike = async () => {
-    this.setState({
-      meal: {
-        isLiked: true
-      }
-    })
-  }
 
-  handleComboUpdate = async (e) => {
-    e.preventDefault();
-    const comboId = e.target.name
 
-    await this.comboLike()
-
+  handleComboUpdate = async (comboId) => {
+    
     console.log("combo id: " + comboId)
 
     console.log(this.state.meal)
-
+    
     const resp = await axios.put(`http://localhost:3005/combos/${comboId}`, this.state.meal);
     const favorite = resp.data;
     this.setState(prevState => ({
@@ -272,6 +262,18 @@ class App extends React.Component {
       },
       combos: [...prevState.combos.filter(combo => combo.id !== prevState.currentCombo.id),
       { ...singleCombo, comments: singleCombo.comments.map(comment => comment.id === newComment.id ? newComment : comment) }]
+    }))
+  }
+  destroyComment = async (id) => {
+    await deleteComment(id);
+    const singleCombo = this.state.combos.find(combo => combo.id === this.state.currentCombo.id)
+    this.setState(prevState => ({
+      currentCombo: {
+        ...prevState.currentCombo,
+        comments: prevState.currentCombo.comments.filter(comment => comment.id !== id)
+      },
+      combos: [...prevState.combos.filter(combo => combo.id !== prevState.currentCombo.id),
+      { ...singleCombo, comments: singleCombo.comments.filter(comment => comment.id !== id) }]
     }))
   }
 
@@ -382,7 +384,7 @@ class App extends React.Component {
                   putComment={this.putComment}
 
                   handleLogout={this.handleLogout}
-
+                  destroyComment={this.destroyComment}
                   currentCombo={this.state.currentCombo}
 
                 />

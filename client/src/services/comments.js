@@ -15,5 +15,7 @@ export const updateComment = async (id, comment) => {
   return resp.data.comment;
 };
 
-// export const deleteComment = async()
-//created commentRouter - steve
+export const deleteComment = async (id) => {
+  const resp = await api.delete(`/comments/${id}`);
+  return resp.data.comment
+}

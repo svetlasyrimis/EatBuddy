@@ -45,6 +45,18 @@ commentRouter.put('/:id', async (req, res) => {
   }
 })
 
+commentRouter.delete('/:id', async (req, res) => {
+  try {
+    await Comment.destroy({ where: { id: req.params.id } })
+    res.status(204).end()
+  } catch (e) {
+    console.log(e.message);
+    res.status(500).send(e.message);
+  }
+})
+
+
+
 
 
 

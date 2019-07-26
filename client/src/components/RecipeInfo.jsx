@@ -4,6 +4,7 @@ import Nav from './Nav';
 
 import { createComment } from '../services/comments'
 import { fetchComments } from '../services/comments'
+
 class RecipeInfo extends React.Component {
   constructor(props) {
     super(props);
@@ -32,7 +33,9 @@ class RecipeInfo extends React.Component {
     return (
       <>
 
-        <Nav />
+        <Nav
+          handleLogout={this.props.handleLogout}
+        />
 
         <div id='container'>
           <Card style={{ width: '50%' }}>
@@ -99,6 +102,7 @@ class RecipeInfo extends React.Component {
                         editComment: comment.comment
                       })
                     }}> Edit </button>
+                    <button onClick={() => this.props.destroyComment(comment.id)}>Delete</button>
                   </>}
             </>
           ))}
@@ -107,11 +111,11 @@ class RecipeInfo extends React.Component {
     )
   }
 }
-        
-        
- export default RecipeInfo;
-        
-        
-        
-        
-        
+
+
+export default RecipeInfo;
+
+
+
+
+

@@ -24,6 +24,7 @@ import {
 
 import ComboDetails from './components/ComboDetails';
 import axios from 'axios';
+import { updateComment } from './services/comments';
 
 
 
@@ -227,6 +228,20 @@ class App extends React.Component {
     }))
   }
 
+  putComment = async (id, commentInfo) => {
+    const newComment = await updateComment(id, commentInfo)
+    debugger;
+    const singleCombo = this.state.combos.find(combo => combo.id === this.state.currentCombo.id)
+    this.setState(prevState => ({
+      currentCombo: {
+        ...prevState.currentCombo,
+        comments: prevState.currentCombo.comments.map(comment => comment.id === newComment.id ? newComment : comment)
+      },
+      combos: [...prevState.combos.filter(combo => combo.id !== prevState.currentCombo.id),
+      { ...singleCombo, comments: singleCombo.comments.map(comment => comment.id === newComment.id ? newComment : comment) }]
+    }))
+  }
+
   handleComboDelete = async (e) => {
     e.preventDefault();
     const comboId = e.target.name
@@ -321,9 +336,12 @@ class App extends React.Component {
 
                   addNewComment={this.addNewComment}
 
+                  putComment={this.putComment}
+
                   handleLogout={this.handleLogout}
 
                   currentCombo={this.state.currentCombo}
+
                 />
               )} />
 

@@ -220,7 +220,7 @@ class App extends React.Component {
 
     console.log(this.state.meal)
 
-    const resp = await axios.put(`http://meal-match.surge.sh/combos/${comboId}`, this.state.meal);
+    const resp = await api.put(`https://mealmatchpandas.herokuapp.com/combos/${comboId}`, this.state.meal);
     const favorite = resp.data;
     this.setState(prevState => ({
       favorites: [favorite, ...prevState.favorites]

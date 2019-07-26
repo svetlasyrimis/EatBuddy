@@ -8,15 +8,18 @@ A meal & drink suggestion app for indecisive eaters.
 
 ##Project Description 
 
-It is an app that helps the user generate a random meal and drink combo so that they don’t have to decide on one. The app requires users to register first, then log in. Then they come to the home page where they can shuffle a meal & drink combo by pressing a button. If they don’t like the combo, they can shuffle until they find one they like. After it shuffles users can favorite a meal and drink to save to their dashboard, with the options to add a combo to a favorites category or to check the recipes of the combo. On the favorites page the user can also delete and put a comment on a combo.
+It is an app that helps the user generate a random meal and drink combo so that they don’t have to decide on one. The app requires users to register first, then log in. Then they come to the home page where they can shuffle a meal & drink combo by pressing a button. Doing this adds the combo to thieir combo board. In the combo board the user has the option to delete a combo, get more info on the combo, and add like it. A user can like a meal and drink and it is added into their favoirtes section.  On the favorites page the user can also delete and put a comment on a combo.
  
 ## Feature List 
 
-* Oath 2.0 - register,login,logout  
+* Auth 2.0 - register,login,logout  
 * Shuffle button to generate a random combo 
 * Access to personalized board of meal and drink combos as well to a favorites and recipe pages 
+* Access to all user's combos
 * Favorites category 
 * Recipes Categories
+* Commments 
+
 
 
 ## Frameworks
@@ -43,16 +46,22 @@ Wireframes should be broken into components which then should be described in a 
 | ------------- |:-------------:| 
 | Header  | This component will render the header. |    
 | Footer    | This component will render the footer.    |            
-| Home       | Not decided yet. |
+| Nav       | Renders the nav bar and logout button. |
 | RegisterForm  | This component will render a register form. |    
 | LoginForm     | This component will render a login form.     |            
-| Logout        | This component will render a logout button.    |
-| Board         | This component will render a board with all of the combos of the user logged in |  		           
+| Login         | This component contains login form functionality.    |
+| ComboBoard    | This component will render a board with all of the combos of the user logged in |  		           
 | Faves         | This component will render the favorites category of the user.    |    	           
-| Recipes       | This component will render a list of combo recipes from the board.     | 		           
-| BoardCard     | This component will render each combo in the board.   |    	           
+| RecipeInfo    | This component will render a list of combo recipes from the board.     | 		           
+| ComboBoard    | This component will render each combo in the board.   |    	           
 | FavoriteCard  | This component will render each combo in the favorites page.    | 
-| RecipeCard    | This component will render a combo recipe in the recipe page.    |    
+| RecipeForm    | This component will render a combo recipe in the recipe page.    | 
+| AllCombos      | This component will render a page with all user's combos |
+| ComboDetails  | This component will render the comments on combos |
+| MakeCombo     | This component will render the combo shuffler    |
+| Shuffler      | This component will render the the photos and names of items |
+
+
 
 ## Express Routes 
 `server.js`

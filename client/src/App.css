@@ -49,6 +49,10 @@ div p{
   z-index: 10;
 }
 
+.heart {
+  color: red;
+}
+
 #nav-bar a{
   justify-content: space-between;
   text-decoration: none;
@@ -167,14 +171,17 @@ div p{
   
 }
 
+
 .comboCard {
   text-align: center;
 }
+
 
 .comboCard button{
   font-family: 'Lobster', cursive;
   font-size: 20px; 
 }
+
 
 .comboHeaders h4{
   text-align: center;
@@ -344,12 +351,7 @@ div p{
     width: 30vw; */
     /* padding-top:100px; */
   }
-  /* .header {
-    display: block;
-    flex-direction: row;
-    justify-content: center;
-    align-content: center;
-  } */
+
   header {
     display: block;
     padding-top: 95px;
@@ -389,4 +391,4 @@ div p{
 
   
 
-  }
+  

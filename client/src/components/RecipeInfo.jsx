@@ -35,6 +35,9 @@ class RecipeInfo extends React.Component {
 
     return (
       <>
+
+        <Nav />
+
         <div id='container'>
           <Card style={{ width: '50%' }}>
             <Card.Img variant="top" src={this.props.currentCombo.meal.strMealThumb} />
@@ -63,6 +66,7 @@ class RecipeInfo extends React.Component {
         <div>
           <form onSubmit={this.handleSubmit}>
             <input
+
               name="comment"
               onChange={this.handleChange}
               type="text"
@@ -101,6 +105,14 @@ class RecipeInfo extends React.Component {
                   </>
               }
             </>
+
+              onChange={this.handleChange}
+              type="text" />
+            <button>Add Comment</button>
+          </form>
+          {this.props.currentCombo.comments.map(comment => (
+            <p>{comment.comment}</p>
+
           ))}
         </div>
       </>
@@ -109,7 +121,9 @@ class RecipeInfo extends React.Component {
 
 }
 
+
 export default RecipeInfo;
+
 
 
 

@@ -57,6 +57,8 @@ class App extends React.Component {
         password: '',
         email: ''
       },
+      isToggleOn: true,
+      bgColor:''
     }
   }
 
@@ -75,11 +77,21 @@ class App extends React.Component {
       drinkId: drinkResp.idDrink,
     }
     this.setState({
-      meal: meal
+
+      meal: {
+        food: foodResp.strMeal,
+        foodImage: foodResp.strMealThumb,
+        foodId: foodResp.idMeal,
+        drink: drinkResp.strDrink,
+        drinkImage: drinkResp.strDrinkThumb,
+        drinkId: drinkResp.idDrink,
+        isLiked: false
+      }
+
     })
     const combo = await createCombo(meal);
     this.setState(prevState => ({
-      combos: [...prevState.combos, combo]
+      combos: [combo,...prevState.combos]
     }));
     console.log(this.state.combos)
   }
@@ -141,6 +153,15 @@ class App extends React.Component {
     this.props.history.push('/home');
     // console.log(user);
     const resp = await fetchUserCombos(this.state.currentUser.id);
+
+    
+    const combos = resp.combos
+    this.setState({
+      combos: combos.reverse()
+    });
+
+    
+
     console.log(resp.data)
 
   }
@@ -191,12 +212,21 @@ class App extends React.Component {
     this.props.history.push('/home');
   }
 
+  
   handleComboUpdate = async (e) => {
     e.preventDefault();
     const comboId = e.target.name
     console.log(comboId)
     this.setState({
       meal: {
+
+        isLiked: !this.state.meal.isLiked
+      },
+      bgColor: 'lightblue'
+    });
+    const resp = await axios.put(`http://localhost:3005/combos/${comboId}`,this.state.meal);
+    
+
         isLiked: true
       }
     })
@@ -204,6 +234,7 @@ class App extends React.Component {
     const resp = await axios.put(`http://localhost:3005/combos/${comboId}`, this.state.meal);
     debugger;
     console.log(resp.data.combo)
+
 
   }
 
@@ -307,14 +338,16 @@ class App extends React.Component {
 
                   getComboRecipes={this.getComboRecipes}
                   handleComboDelete={this.handleComboDelete}
-                  handleLogout={this.handleLogout}
+                  isToggleOn={this.state.isToggleOn}
 
+                  handleLogout={this.handleLogout}
 
 
                   combos={this.state.combos}
                   handleViewCombos={this.handleViewCombos}
                   handleComboDelete={this.handleComboDelete}
                   handleComboUpdate={this.handleComboUpdate}
+                  bgColor={this.state.bgColor}
                 />
               )} />
 

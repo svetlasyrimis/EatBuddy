@@ -8,14 +8,6 @@ favoriteRouter.get('/', (req, res) => {
   res.json({ favorites });
 });
 
-favoriteRouter.post('/', restrict, async (req, res) => {
-  const user = User.findByPk(res.locals.id);
-  const combo = Combo
-  const favorite = await user.addCombo(combo)
-  console.log(favorite);
-  res.json({ favorite });
-});
-
 favoriteRouter.delete('/:id', async (req, res) => {
   try {
     await Favorite.destroy({
@@ -30,28 +22,6 @@ favoriteRouter.delete('/:id', async (req, res) => {
   }
 
 })
-
-
-// favoriteRouter.put('id/:id', async (req, res) => {
-//   try {
-//     const id = req.params.id;
-//     const data = req.body;
-//     await favorite.update(
-//       data,{
-//         where: {
-//           id
-//         },
-//       });
-//     const favorite = await Favorite.findByPk(id);
-//     res.json(favorite);
-//   } catch (e) {
-//     console.log(e.message);
-//     res.status(500).send(e.message);
-//   }
-// });
-
-
-
 
 
 module.exports = favoriteRouter

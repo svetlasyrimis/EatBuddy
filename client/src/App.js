@@ -25,7 +25,7 @@ import {
 
 import ComboDetails from './components/ComboDetails';
 import axios from 'axios';
-import { updateComment,deleteComment } from './services/comments';
+import { updateComment, deleteComment } from './services/comments';
 
 
 
@@ -157,7 +157,7 @@ class App extends React.Component {
     // console.log(user);
     console.log(user)
     const resp = await fetchUserCombos(this.state.currentUser.id);
-    
+
     // console.log(combos)
     const combos = resp.combos
     this.setState({
@@ -215,12 +215,12 @@ class App extends React.Component {
 
 
   handleComboUpdate = async (comboId) => {
-    
+
     console.log("combo id: " + comboId)
 
     console.log(this.state.meal)
-    
-    const resp = await axios.put(`http://localhost:3005/combos/${comboId}`, this.state.meal);
+
+    const resp = await axios.put(`http://meal-match.surge.sh/combos/${comboId}`, this.state.meal);
     const favorite = resp.data;
     this.setState(prevState => ({
       favorites: [favorite, ...prevState.favorites]

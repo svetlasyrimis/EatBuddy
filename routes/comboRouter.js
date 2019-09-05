@@ -72,14 +72,21 @@ comboRouter.put('/:id', async (req, res) => {
   }
 });
 
-comboRouter.get('/favorites', async (req, res) => {
-  const favorites = await Combo.findAll({
-    where: {
-      isLiked: true
-    }
-  })
-  res.jsonp({favorites})
-})
+// comboRouter.get('/favorites', async (req, res) => {
+//   try {
+//     const favorites = await Combo.findAll({
+//       where: {
+//         isLiked: true
+//       },
+//       include: [Comment]
+      
+//     })
+//     res.json({favorites})
+//   } catch (e) {
+//     res.json("Can't find any still")
+//   }
+  
+// })
 
 comboRouter.get('/:id', async (req, res) => {
   const id = req.params.id

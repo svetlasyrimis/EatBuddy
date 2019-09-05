@@ -5,7 +5,8 @@ import Nav from './Nav';
 import RecipeInfo from './RecipeInfo';
 
 import { Link, withRouter, Redirect } from 'react-router-dom'
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+import ComboCard from './ComboCard'
 
 
 
@@ -35,7 +36,8 @@ const ComboBoard = (props) => {
           <div className="boardCard" key={combo.id}>
 
             <Shuffler data={combo} />
-            <button
+            <ComboCard id={combo.id} handleComboDelete={props.handleComboDelete} getComboRecipes={props.getComboRecipes} handleComboUpdate={props.handleComboUpdate}/>
+            {/* <button
               name={combo.id}
               onClick={props.handleComboDelete}>Delete</button>
             <button name={combo.id} onClick={() => {
@@ -49,7 +51,7 @@ const ComboBoard = (props) => {
                 props.handleComboUpdate(combo.id)
 
               }}
-              variant="info" >Like<span className="heart">&hearts;</span></button>
+              variant="info" >Like<span className="heart">&hearts;</span></button> */}
           </div>
 
 

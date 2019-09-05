@@ -30,8 +30,10 @@ export const getOneCombo = async(id)  => {
 }
 
 export const fetchFavorites = async () => {
-  const resp = await api.get(`/combos/favorites`); 
-  return resp.data
+  debugger;
+  const resp = await api.get(`/favorites`); 
+  console.log(resp)
+  return resp.data.favorites
 }
 
 

@@ -8,7 +8,7 @@ import ComboBoard from './components/ComboBoard'
 import Nav from './components/Nav'
 import RecipeInfo from './components/RecipeInfo'
 import AllCombos from './components/AllCombos'
-import { createCombo, deleteCombo, getALL, fetchUserCombos } from './services/combos'
+import { createCombo, deleteCombo, getALL, fetchUserCombos, fetchFavorites } from './services/combos'
 import Faves from './components/Faves'
 
 import Footer from './components/Footer'
@@ -120,10 +120,12 @@ class App extends React.Component {
     const user = await verifyToken();
 
     if (user) {
-
+     
 
       this.setState({
-        currentUser: user
+        currentUser: user,
+        
+        
 
       })
       this.props.history.push(`/home`)
@@ -157,12 +159,14 @@ class App extends React.Component {
     // console.log(user);
     console.log(user)
     const resp = await fetchUserCombos(this.state.currentUser.id);
-
+    const favorites = await fetchFavorites()
     // console.log(combos)
     const combos = resp.combos
     this.setState({
-      combos: combos.reverse()
+      combos: combos.reverse(),
+      favorites: favorites
     });
+    
 
   }
 
@@ -215,12 +219,25 @@ class App extends React.Component {
 
 
   handleComboUpdate = async (comboId) => {
-
+    const currentCombo = this.state.combos.find(combo => combo.id === comboId)
     console.log("combo id: " + comboId)
-
-    console.log(this.state.meal)
-
-    const resp = await axios.put(`https://mealmatchpandas.herokuapp.com/combos/${comboId}`, this.state.meal);
+    const comboFoodItem = await fetchMealId(currentCombo.foodId)
+    const comboDrinkItem = await fetchDrinkId(currentCombo.drinkId)
+    this.setState({
+      currentCombo: {
+        foodId: comboFoodItem.idMeal,
+        food: comboFoodItem.strMeal,
+        foodImage: comboFoodItem.strMealThumb,
+        drink: comboDrinkItem.strDrink,
+        drinkImage: comboDrinkItem.strDrinkThumb,
+        drinkId: comboDrinkItem.idDrink,
+        isLiked: true
+      }
+    })
+    
+    debugger;
+    // https://mealmatchpandas.herokuapp.com/combos/
+    const resp = await axios.put(`http://localhost:3005/combos/${comboId}`, this.state.currentCombo);
     const favorite = resp.data;
     this.setState(prevState => ({
       favorites: [favorite, ...prevState.favorites]

@@ -13,13 +13,6 @@ commentRouter.get('/', async (req, res) => {
 
 
 
-// commentRouter.get('/all', async (req, res) => {
-//   const comments = await Comment.findAll();
-
-//   res.json({ comments });
-// });
-
-
 commentRouter.post('/', async (req, res) => {
   const combo = await Combo.findByPk(req.body.combo)
   const comment = await combo.createComment({ comment: req.body.comment });

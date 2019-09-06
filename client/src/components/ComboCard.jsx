@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 export default class ComboCard extends Component {
   constructor(props) {
+    console.log(props)
     super(props)
     this.state = {
       isAdded: false
@@ -43,14 +44,7 @@ export default class ComboCard extends Component {
             this.props.getComboRecipes(this.props.id)
           }}>Get Info</button>
           <p><strong>Liked<span className="heart">&hearts;</span><span>&#10004;</span></strong> </p>
-          {/* <button name={this.props.id}
-              onClick={(e) => {
-                e.preventDefault();
-                this.props.handleComboUpdate(this.props.id);
-               
-
-              }}
-            variant="info" >Liked<span className="heart">&hearts;</span></button> */}
+          
         </>
 
         }

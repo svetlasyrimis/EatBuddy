@@ -21,8 +21,11 @@ export const deleteCombo = async (id) => {
 
 export const fetchUserCombos = async (id) => {
   const resp = await api.get(`/users/${id}/combos`);
-  
-  return resp.data;
+  console.log(resp.data.combos)
+  const filtered = resp.data.combos.filter(el => !el.isLiked)
+  console.log(filtered)
+  return filtered;
+ 
 };
 export const getOneCombo = async(id)  => {
   const resp = await api.get(`/combos/${id}`);
@@ -30,7 +33,7 @@ export const getOneCombo = async(id)  => {
 }
 
 export const fetchFavorites = async () => {
-  debugger;
+  
   const resp = await api.get(`/favorites`); 
   console.log(resp)
   return resp.data.favorites

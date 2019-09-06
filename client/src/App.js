@@ -8,7 +8,7 @@ import ComboBoard from './components/ComboBoard'
 import Nav from './components/Nav'
 import RecipeInfo from './components/RecipeInfo'
 import AllCombos from './components/AllCombos'
-import { createCombo, deleteCombo, getALL, fetchUserCombos, fetchFavorites } from './services/combos'
+import { createCombo, deleteCombo, getALL, fetchUserCombos, fetchFavorites, getOneCombo } from './services/combos'
 import Faves from './components/Faves'
 
 import Footer from './components/Footer'
@@ -68,9 +68,7 @@ class App extends React.Component {
 
   fetchMealDrink = async () => {
     const drinkResp = await fetchDrink();
-    // console.log(drinkResp)
     const foodResp = await fetchFood();
-    // console.log(foodResp);
     const meal = {
       food: foodResp.strMeal,
       foodImage: foodResp.strMealThumb,
@@ -101,18 +99,21 @@ class App extends React.Component {
 
 
   getComboRecipes = async (comboId) => {
-    const currentCombo = this.state.combos.find(combo => combo.id === comboId)
-    const comboFoodItem = await fetchMealId(currentCombo.foodId)
-    const comboDrinkItem = await fetchDrinkId(currentCombo.drinkId)
+    const data = await getOneCombo(comboId);
+   
+    const comboFoodItem = await fetchMealId(data.combo.foodId)
+    const comboDrinkItem = await fetchDrinkId(data.combo.drinkId)
+   
     this.setState({
       currentCombo: {
         id: comboId,
         meal: comboFoodItem,
         drink: comboDrinkItem,
-        comments: currentCombo.comments
+        comments: data.combo.comments
       }
     })
-    this.props.history.push(`/recipe/${currentCombo.id}`)
+    console.log(this.state.currentCombo)
+    this.props.history.push(`/recipe/${parseInt(comboId)}`)
   }
 
   componentDidMount = async () => {
@@ -120,13 +121,15 @@ class App extends React.Component {
     const user = await verifyToken();
 
     if (user) {
-     
-
+      
       this.setState({
         currentUser: user,
-        
-        
-
+      })
+      const combos = await fetchUserCombos(this.state.currentUser.id);
+      const favorites = await fetchFavorites()
+      this.setState({
+        combos: combos,
+        favorites:favorites
       })
       this.props.history.push(`/home`)
     }
@@ -156,18 +159,7 @@ class App extends React.Component {
       currentView: 'welcome'
     })
     this.props.history.push('/home');
-    // console.log(user);
-    console.log(user)
-    const resp = await fetchUserCombos(this.state.currentUser.id);
-    const favorites = await fetchFavorites()
-    // console.log(combos)
-    const combos = resp.combos
-    this.setState({
-      combos: combos.reverse(),
-      favorites: favorites
-    });
-    
-
+ 
   }
 
   handleLogout = (e) => {
@@ -234,8 +226,11 @@ class App extends React.Component {
         isLiked: true
       }
     })
+    this.setState(prevState => ({
+      combos: prevState.combos.filter(combo => combo.id !== comboId)
+    }))
     
-    debugger;
+    
     // https://mealmatchpandas.herokuapp.com/combos/
     const resp = await axios.put(`http://localhost:3005/combos/${comboId}`, this.state.currentCombo);
     const favorite = resp.data;
@@ -257,40 +252,35 @@ class App extends React.Component {
   }
 
   addNewComment = (comment) => {
-    const singleCombo = this.state.combos.find(combo => combo.id === this.state.currentCombo.id)
-
     this.setState(prevState => ({
       currentCombo: {
         ...prevState.currentCombo,
-        comments: [...prevState.currentCombo.comments, comment]
+        comments: [comment,...prevState.currentCombo.comments]
       },
-      combos: [...prevState.combos.filter(combo => combo.id !== prevState.currentCombo.id), { ...singleCombo, comments: [...singleCombo.comments, comment] }]
+      combos: [...prevState.combos.filter(combo => combo.id !== prevState.currentCombo.id)]
     }))
   }
 
   putComment = async (id, commentInfo) => {
     const newComment = await updateComment(id, commentInfo)
-    debugger;
-    const singleCombo = this.state.combos.find(combo => combo.id === this.state.currentCombo.id)
+    
     this.setState(prevState => ({
       currentCombo: {
         ...prevState.currentCombo,
         comments: prevState.currentCombo.comments.map(comment => comment.id === newComment.id ? newComment : comment)
       },
-      combos: [...prevState.combos.filter(combo => combo.id !== prevState.currentCombo.id),
-      { ...singleCombo, comments: singleCombo.comments.map(comment => comment.id === newComment.id ? newComment : comment) }]
+      combos: [...prevState.combos.filter(combo => combo.id !== prevState.currentCombo.id)]
+
     }))
   }
   destroyComment = async (id) => {
     await deleteComment(id);
-    const singleCombo = this.state.combos.find(combo => combo.id === this.state.currentCombo.id)
     this.setState(prevState => ({
       currentCombo: {
         ...prevState.currentCombo,
         comments: prevState.currentCombo.comments.filter(comment => comment.id !== id)
       },
-      combos: [...prevState.combos.filter(combo => combo.id !== prevState.currentCombo.id),
-      { ...singleCombo, comments: singleCombo.comments.filter(comment => comment.id !== id) }]
+      combos: [...prevState.combos.filter(combo => combo.id !== prevState.currentCombo.id)]
     }))
   }
 
@@ -393,9 +383,10 @@ class App extends React.Component {
                 />
               )} />
 
-              <Route path="/recipe/:id" render={() => (
+              <Route path="/recipe/:id" render={(props) => (
                 <RecipeInfo
-
+               
+                  id={props.match.params.id}
                   addNewComment={this.addNewComment}
 
                   putComment={this.putComment}

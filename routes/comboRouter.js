@@ -11,7 +11,7 @@ comboRouter.get('/all', async (req, res) => {
   const combos = await Combo.findAll({
     include: [Comment]
   });
-
+  
   res.json({ combos });
 });
 
@@ -46,7 +46,7 @@ comboRouter.delete('/:id', restrict, async (req, res) => {
 
 })
 comboRouter.get('/:id', async (req, res) => {
-  const combo = await Combo.findByPk(req.params.id);
+  const combo = await Combo.findByPk(req.params.id, { include: [Comment] });
 
   res.json({ combo });
 })
@@ -72,21 +72,7 @@ comboRouter.put('/:id', async (req, res) => {
   }
 });
 
-// comboRouter.get('/favorites', async (req, res) => {
-//   try {
-//     const favorites = await Combo.findAll({
-//       where: {
-//         isLiked: true
-//       },
-//       include: [Comment]
-      
-//     })
-//     res.json({favorites})
-//   } catch (e) {
-//     res.json("Can't find any still")
-//   }
-  
-// })
+
 
 comboRouter.get('/:id', async (req, res) => {
   const id = req.params.id

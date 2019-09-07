@@ -124,11 +124,11 @@ class App extends React.Component {
       // this.setState({
       //   currentUser: user,
       // })
-      const combos = await fetchUserCombos(user.id);
-      const favorites = await fetchFavorites(user.id)
+      // const combos = await fetchUserCombos(user.id);
+      // const favorites = await fetchFavorites(user.id)
       this.setState({
-        combos: combos,
-        favorites: favorites,
+        // combos: combos,
+        // favorites: favorites,
         currentUser: user,
       })
       this.props.history.push(`/home`)

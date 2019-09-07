@@ -232,6 +232,7 @@ class App extends React.Component {
     
     
     // https://mealmatchpandas.herokuapp.com/combos/
+    // https://mealmatch123.herokuapp.com/
     const resp = await axios.put(`https://mealmatch123.herokuapp.com/combos/${comboId}`, this.state.currentCombo);
     const favorite = resp.data;
     this.setState(prevState => ({
@@ -255,10 +256,11 @@ class App extends React.Component {
     this.setState(prevState => ({
       currentCombo: {
         ...prevState.currentCombo,
-        comments: [comment,...prevState.currentCombo.comments]
+        comments: [...prevState.currentCombo.comments,comment]
       },
       combos: [...prevState.combos.filter(combo => combo.id !== prevState.currentCombo.id)]
     }))
+    console.log("hey")
   }
 
   putComment = async (id, commentInfo) => {

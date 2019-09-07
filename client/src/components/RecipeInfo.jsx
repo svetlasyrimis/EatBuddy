@@ -84,8 +84,8 @@ class RecipeInfo extends React.Component {
             </form>
 
 
-            {this.props.currentCombo.comments && this.props.currentCombo.comments.map(comment => (
-              <>
+            {this.props.currentCombo.comments.map(comment => (
+              <div key={comment.id}>
                 {
                   this.state.isEdit === comment.id ?
                     <form onSubmit={() => {
@@ -105,16 +105,17 @@ class RecipeInfo extends React.Component {
                     </form>
                     :
                     <>
-                      <p>{comment.comment}</p>
+                      <div><p>{comment.comment}</p>
                       <button onClick={() => {
                         this.setState({
                           isEdit: comment.id,
                           editComment: comment.comment
                         })
                       }}> Edit </button>
-                      <button onClick={() => this.props.destroyComment(comment.id)}>Delete</button>
+                        <button onClick={() => this.props.destroyComment(comment.id)}>Delete</button>
+                        </div>
                     </>}
-              </>
+              </div>
             ))}
           </div>
           </>

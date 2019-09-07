@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-// const BASE_URL = 'http://localhost:3005';
+const BASE_URL = 'http://localhost:3005';
 // const BASE_URL = 'https://mealmatchpandas.herokuapp.com'
-const BASE_URL = 'https://mealmatch123.herokuapp.com/'
+// const BASE_URL = 'https://mealmatch123.herokuapp.com/'
 
 export const api = axios.create({
   baseURL: BASE_URL,

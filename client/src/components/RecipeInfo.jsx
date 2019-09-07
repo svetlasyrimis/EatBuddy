@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import { createComment } from '../services/comments'
+import { createComment } from '../services/comments';
+
 
 
 class RecipeInfo extends React.Component {
@@ -39,7 +40,7 @@ class RecipeInfo extends React.Component {
 
     return (
       <>
-
+      
        
         {this.props.currentCombo &&
           <>

@@ -32,11 +32,10 @@ export const getOneCombo = async(id)  => {
   return resp.data
 }
 
-export const fetchFavorites = async () => {
-  
-  const resp = await api.get(`/favorites`); 
+export const fetchFavorites = async (id) => {
+  const resp = await api.get(`/users/${id}/favorites`); 
   console.log(resp)
-  return resp.data.favorites
+  return resp.data.combos
 }
 
 

@@ -3,6 +3,7 @@ import Shuffler from './Shuffler'
 
 
 const Faves = (props) => {
+  console.log(props)
   return (
 
     <div className="comboHeaders">
@@ -10,7 +11,7 @@ const Faves = (props) => {
 
       <div className="allCombos">
        
-        {props.favorites.map(favorite => (
+        {props.favorites && props.favorites.map(favorite => (
           <div className="boardCard" key={favorite.id}>
             <Shuffler data={favorite} /> <span className="heart">&hearts;</span>
           </div>

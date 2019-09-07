@@ -1,5 +1,5 @@
 git add . &&
-git commit -m "$1" &&
+git commit -m "deploy" &&
 git push origin fix &&
 npm run build &&
 cd build &&

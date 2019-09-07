@@ -124,11 +124,11 @@ class App extends React.Component {
       // this.setState({
       //   currentUser: user,
       // })
-      const combos = await fetchUserCombos(user.id);
-      const favorites = await fetchFavorites()
+      // const combos = await fetchUserCombos(user.id);
+      // const favorites = await fetchFavorites()
       this.setState({
-        combos: combos,
-        favorites: favorites,
+        // combos: combos,
+        // favorites: favorites,
         currentUser: user,
       })
       this.props.history.push(`/home`)
@@ -150,14 +150,19 @@ class App extends React.Component {
   handleLoginSubmit = async (ev) => {
     ev.preventDefault();
     const user = await loginUser(this.state.loginFormData);
+    const combos = await fetchUserCombos(user.id);
+    const favorites = await fetchFavorites()
     this.setState({
       loginFormData: {
         name: '',
         password: '',
       },
       currentUser: user,
-      currentView: 'welcome'
+      currentView: 'welcome',
+      combos: combos,
+      favorites: favorites,
     })
+   
     this.props.history.push('/home');
  
   }
@@ -235,7 +240,7 @@ class App extends React.Component {
     
     // https://mealmatchpandas.herokuapp.com/combos/
     // https://mealmatch123.herokuapp.com/
-    const resp = await axios.put(`https://mealmatch123.herokuapp.com/combos/${comboId}`, this.state.currentCombo);
+    const resp = await axios.put(`http://localhost:3005/combos/${comboId}`, this.state.currentCombo);
     const favorite = resp.data;
 
     this.setState(prevState => ({

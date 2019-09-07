@@ -84,7 +84,7 @@ class RecipeInfo extends React.Component {
             </form>
 
 
-            {this.props.currentCombo.comments.map(comment => (
+            {this.props.currentCombo.comments && this.props.currentCombo.comments.map(comment => (
               <div key={comment.id}>
                 {
                   this.state.isEdit === comment.id ?

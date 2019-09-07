@@ -63,4 +63,17 @@ userRouter.get('/:id/combos', async (req, res) => {
   res.json({combos})
 })
 
+userRouter.get('/:id/favorites', async (req, res) => {
+  const id = req.params.id;
+  console.log(id)
+  const combos = await Combo.findAll({
+    where: {
+      userId: id,
+      isLiked: true
+    }
+  })
+  console.log(combos);
+  res.json({combos})
+})
+
 module.exports = userRouter

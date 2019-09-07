@@ -253,7 +253,7 @@ class App extends React.Component {
   }
 
   addNewComment = (comment) => {
-    debugger
+    console.log(comment)
     this.setState(prevState => ({
       currentCombo: {
         ...prevState.currentCombo,
@@ -261,7 +261,7 @@ class App extends React.Component {
       },
       combos: [...prevState.combos.filter(combo => combo.id !== prevState.currentCombo.id)]
     }))
-    console.log("hey")
+   
   }
 
   putComment = async (id, commentInfo) => {

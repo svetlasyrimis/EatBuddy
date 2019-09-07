@@ -253,6 +253,7 @@ class App extends React.Component {
   }
 
   addNewComment = (comment) => {
+    debugger
     this.setState(prevState => ({
       currentCombo: {
         ...prevState.currentCombo,

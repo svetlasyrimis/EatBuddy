@@ -121,19 +121,19 @@ class App extends React.Component {
     const user = await verifyToken();
 
     if (user) {
-      
-      this.setState({
-        currentUser: user,
-      })
-      const combos = await fetchUserCombos(this.state.currentUser.id);
+      // this.setState({
+      //   currentUser: user,
+      // })
+      const combos = await fetchUserCombos(user.id);
       const favorites = await fetchFavorites()
       this.setState({
         combos: combos,
-        favorites:favorites
+        favorites: favorites,
+        currentUser: user,
       })
       this.props.history.push(`/home`)
     }
-    console.log(this.state.currentUser)
+    // console.log(this.state.currentUser)
   }
 
 
@@ -215,6 +215,7 @@ class App extends React.Component {
     console.log("combo id: " + comboId)
     const comboFoodItem = await fetchMealId(currentCombo.foodId)
     const comboDrinkItem = await fetchDrinkId(currentCombo.drinkId)
+    
     this.setState({
       currentCombo: {
         foodId: comboFoodItem.idMeal,
@@ -226,6 +227,7 @@ class App extends React.Component {
         isLiked: true
       }
     })
+
     this.setState(prevState => ({
       combos: prevState.combos.filter(combo => combo.id !== comboId)
     }))
@@ -235,6 +237,7 @@ class App extends React.Component {
     // https://mealmatch123.herokuapp.com/
     const resp = await axios.put(`https://mealmatch123.herokuapp.com/combos/${comboId}`, this.state.currentCombo);
     const favorite = resp.data;
+
     this.setState(prevState => ({
       favorites: [favorite, ...prevState.favorites]
     }));

@@ -232,7 +232,7 @@ class App extends React.Component {
     
     
     // https://mealmatchpandas.herokuapp.com/combos/
-    const resp = await axios.put(`http://localhost:3005/combos/${comboId}`, this.state.currentCombo);
+    const resp = await axios.put(`https://mealmatch123.herokuapp.com/combos/${comboId}`, this.state.currentCombo);
     const favorite = resp.data;
     this.setState(prevState => ({
       favorites: [favorite, ...prevState.favorites]

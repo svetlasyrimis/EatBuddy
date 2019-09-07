@@ -256,7 +256,7 @@ class App extends React.Component {
     this.setState(prevState => ({
       currentCombo: {
         ...prevState.currentCombo,
-        comments: [...currentCombo.comments,comment]
+        comments: [currentCombo.comments,comment]
       },
       combos: [...prevState.combos.filter(combo => combo.id !== prevState.currentCombo.id)]
     }))

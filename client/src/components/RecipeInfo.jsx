@@ -1,9 +1,7 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import Nav from './Nav';
-
 import { createComment } from '../services/comments'
-import { fetchComments } from '../services/comments'
+
 
 class RecipeInfo extends React.Component {
   
@@ -32,7 +30,6 @@ class RecipeInfo extends React.Component {
     });
   }
   componentDidMount = async () => {
-    // this.fetchComments(); 
     this.setState({
       id: this.props.id,
       
@@ -43,9 +40,7 @@ class RecipeInfo extends React.Component {
     return (
       <>
 
-        <Nav
-          handleLogout={this.props.handleLogout}
-        />
+       
         {this.props.currentCombo &&
           <>
           <div id='container'>

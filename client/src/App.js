@@ -1,11 +1,11 @@
 import React from 'react';
 import { fetchFood, fetchDrink, fetchMealId, fetchDrinkId } from './services/api-helper'
 import './App.css';
+import Nav from './components/Nav';
 import Header from './components/Header'
 import Login from './components/Login'
 import MakeCombo from './components/MakeCombo'
 import ComboBoard from './components/ComboBoard'
-import Nav from './components/Nav'
 import RecipeInfo from './components/RecipeInfo'
 import AllCombos from './components/AllCombos'
 import { createCombo, deleteCombo, getALL, fetchUserCombos, fetchFavorites, getOneCombo } from './services/combos'
@@ -328,15 +328,15 @@ class App extends React.Component {
         <div>
           {this.state.currentUser && (
             <>
+              <Nav handleLogout={this.handleLogout}/>
               <Route path="/home" exact render={() => (
                 <>
-
+                  
                   <p>Hello {this.state.currentUser.name}!</p>
                   <MakeCombo
                     isLoggedIn={this.state.isLoggedIn}
                     currentView={this.state.currentView}
                     loginFormData={this.state.loginFormData}
-                    handleLogout={this.handleLogout}
                     meal={this.state.meal}
                     fetchMealDrink={this.fetchMealDrink}
                     changeBoard={this.changeBoard}
@@ -346,14 +346,8 @@ class App extends React.Component {
 
               <Route path="/combo" render={() => (
                 <ComboBoard
-
                   getComboRecipes={this.getComboRecipes}
-                  handleComboDelete={this.handleComboDelete}
                   isToggleOn={this.state.isToggleOn}
-
-                  handleLogout={this.handleLogout}
-
-
                   combos={this.state.combos}
                   handleViewCombos={this.handleViewCombos}
                   handleComboDelete={this.handleComboDelete}
@@ -364,7 +358,6 @@ class App extends React.Component {
 
               <Route path="/allcombos" render={() => (
                 <AllCombos
-                  handleLogout={this.handleLogout}
                   allcombos={this.state.allcombos}
                 />
               )} />
@@ -378,20 +371,14 @@ class App extends React.Component {
               <Route path="/favorites" render={() => (
                 <Faves
                   favorites={this.state.favorites}
-                  handleLogout={this.handleLogout}
-
                 />
               )} />
 
               <Route path="/recipe/:id" render={(props) => (
                 <RecipeInfo
-               
                   id={props.match.params.id}
                   addNewComment={this.addNewComment}
-
                   putComment={this.putComment}
-
-                  handleLogout={this.handleLogout}
                   destroyComment={this.destroyComment}
                   currentCombo={this.state.currentCombo}
 

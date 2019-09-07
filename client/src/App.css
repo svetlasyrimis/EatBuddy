@@ -292,16 +292,19 @@ div p{
   box-shadow: 10px 10px 5px grey;
 }
 
-#nav-bar button{
+.btn-primary {
   color: black;
-  padding: 9px;
-  padding-left: 15px;
-  padding-right: 15px;
+  border:none;
   font-family: 'Lobster', cursive;
   font-size: 25px; 
-  margin-top: 10px;
   background-color: white;
-  box-shadow: 0px 0px 0px;
+  border-radius: 10%;
+
+}
+.btn-primary:hover {
+  background-color: rgb(96, 189, 223);
+  border:none;
+  transition: .3s all ease-in-out;
 }
 
 

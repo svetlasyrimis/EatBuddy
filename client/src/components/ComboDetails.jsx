@@ -1,6 +1,6 @@
 import React from 'react';
 import Shuffler from './Shuffler';
-import Button from 'react-bootstrap/Button'
+
 
 const ComboDetails = (props) => {
   return (

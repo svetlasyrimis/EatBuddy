@@ -1,5 +1,5 @@
 import React from 'react';
-import Nav from './Nav';
+
 import Shuffler from './Shuffler'
 
 const AllCombos = (props) => {
@@ -9,9 +9,7 @@ const AllCombos = (props) => {
       <h4>All Combos</h4>
 
       <div className="allCombos">
-        <Nav
-          handleLogout={props.handleLogout}
-        />
+        
 
         {props.allcombos.map(combo => (
           <div className="boardCard" key={combo.id}>

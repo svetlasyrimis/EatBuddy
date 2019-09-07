@@ -1,24 +1,13 @@
 import React from 'react';
 import Shuffler from './Shuffler';
-import Nav from './Nav';
-
-import RecipeInfo from './RecipeInfo';
-
-import { Link, withRouter, Redirect } from 'react-router-dom'
-import Button from 'react-bootstrap/Button';
+import { withRouter, Redirect } from 'react-router-dom'
 import ComboCard from './ComboCard'
-
-
 
 
 const ComboBoard = (props) => {
   console.log(props)
   return (
     <div className="comboCard">
-      <Nav
-        handleLogout={props.handleLogout}
-      />
-
       <button name="all" onClick={() => {
         props.handleViewCombos()
         props.history.push('/allcombos')
